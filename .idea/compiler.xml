@@ -17,6 +17,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="mailserver" options="-parameters" />
+      <module name="schr-mapper" options="-parameters" />
+      <module name="schr-model" options="-parameters" />
+      <module name="schr-service" options="-parameters" />
       <module name="schr-web" options="-parameters" />
     </option>
   </component>
