@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: zzl10250523
+    url: jdbc:mysql://localhost:3306/schr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#  rabbitmq:
+#    username: guest
+#    password: guest
+#    host: 127.0.0.1
+#    #    publisher-confirms: true
+#    publisher-confirm-type: correlated
+#    publisher-returns: true
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    connect-timeout: 10000
+    password: root
+server:
+  port: 8081
+  compression: #开启gzip解压
+    enabled: true

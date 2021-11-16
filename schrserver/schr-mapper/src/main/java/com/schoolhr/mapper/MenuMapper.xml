@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.MenuMapper">
+    <insert id="insert"></insert>
+    <insert id="insertSelective"></insert>
+    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKey"></update>
+    <delete id="deleteByPrimaryKey"></delete>
+    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Menu"></select>
+    <select id="getMenusByHrId" resultType="com.schoolhr.model.Menu"></select>
+    <select id="getAllMenusWithRole" resultType="com.schoolhr.model.Menu">
+        select m.*,r.`id` as rid,r.`name` as rname,r.`nameZh` as rnameZh from menu m,menu_role mr,role r where m.`id`=mr.`mid` and mr.`rid`=r.`id` order by m.`id`
+    </select>
+    <select id="getAllMenus" resultType="com.schoolhr.model.Menu"></select>
+    <select id="getMidsByRid" resultType="java.lang.Integer"></select>
+</mapper>
