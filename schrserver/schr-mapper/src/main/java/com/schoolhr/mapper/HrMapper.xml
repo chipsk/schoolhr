@@ -13,6 +13,5 @@
     <select id="getAllHrs" resultType="com.schoolhr.model.Hr"></select>
     <select id="getAllHrsExceptCurrentHr" resultType="com.schoolhr.model.Hr"></select>
     <select id="loadUserByUsername" resultType="com.schoolhr.model.Hr">
-        select
     </select>
 </mapper>
