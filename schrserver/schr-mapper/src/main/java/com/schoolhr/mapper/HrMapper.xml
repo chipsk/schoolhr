@@ -9,9 +9,12 @@
     <update id="updateUserface"></update>
     <delete id="deleteByPrimaryKey"></delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Hr"></select>
-    <select id="getHrRolesById" resultType="com.schoolhr.model.Role"></select>
+    <select id="getHrRolesById" resultType="com.schoolhr.model.Role">
+        SELECT r.* FROM role r,hr_role hrr WHERE hrr.`rid`=r.`id` AND hrr.`hrid`=#{id}
+    </select>
     <select id="getAllHrs" resultType="com.schoolhr.model.Hr"></select>
     <select id="getAllHrsExceptCurrentHr" resultType="com.schoolhr.model.Hr"></select>
     <select id="loadUserByUsername" resultType="com.schoolhr.model.Hr">
+        select * from hr where username=#{username}
     </select>
 </mapper>

@@ -37,6 +37,7 @@ public class Hr implements UserDetails {
     private String remark;
     private List<Role> roles;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,7 +133,11 @@ public class Hr implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<SimpleGrantedAuthority> authorities =new ArrayList<>(roles.size());
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
     }
 
     public String getPassword() {
@@ -158,4 +163,6 @@ public class Hr implements UserDetails {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+
 }

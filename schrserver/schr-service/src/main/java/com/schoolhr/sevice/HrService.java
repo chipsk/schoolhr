@@ -25,14 +25,15 @@ public class HrService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Hr hr = hrMapper.loadUserByUsername(username);
-        //判断用户是否存在
-        if (hr == null) {
+        Hr hr=hrMapper.loadUserByUsername(username);
+        if (hr==null){
             throw new UsernameNotFoundException("用户名不存在");
         }
-//        hr.setRoles(hrMapper.getHrRolesById(hr.getId()));
+        //设置角色
+        hr.setRoles(hrMapper.getHrRolesById(hr.getId()));
         return hr;
     }
+
 
     public List<Hr> getAllHrs(String keywords) {
         return hrMapper.getAllHrs(HrUtils.getCurrentHr().getId(),keywords);

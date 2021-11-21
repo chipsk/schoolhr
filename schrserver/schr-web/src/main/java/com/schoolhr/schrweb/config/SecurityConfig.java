@@ -15,16 +15,13 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
-import org.springframework.security.web.session.ConcurrentSessionFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +29,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     HrService hrService;
+
+//    @Autowired
+//    CustomUrlDecisionManager customUrlDecisionManager;
+//    @Autowired
+//    CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
 
 
     @Bean //密码编译工具,给明文加密
@@ -48,11 +51,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(hrService);
     }
 
+    //给登录页放行 不会被拦截
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/login");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()//开启登录配置
-                .anyRequest().authenticated()//登录之后就可以访问的接口
+        http.authorizeRequests()
+//                //.anyRequest().authenticated()
+//                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+//                    @Override
+//                    public <O extends FilterSecurityInterceptor> O postProcess(O object) {
+//                        object.setAccessDecisionManager(customUrlDecisionManager);
+//                        object.setSecurityMetadataSource(customFilterInvocationSecurityMetadataSource);
+//                        return object;
+//                    }
+//                })
                 .and()
                 .formLogin()
                 //定义登录时，用户名的key，默认为username
@@ -122,6 +138,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf().disable();
+//                .exceptionHandling()
+//                //没有认证时，在这里处理结果，不要重定向
+//                .authenticationEntryPoint(new AuthenticationEntryPoint() {
+//                    @Override
+//                    public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
+//                        resp.setContentType("application/json;charset=utf-8");
+//                        PrintWriter out = resp.getWriter();
+//                        RespBean respBean = RespBean.error("访问失败");
+//                        if (e instanceof InsufficientAuthenticationException){
+//                            respBean.setMsg("请求失败，请联系管理员");
+//                        }
+//                        out.write(new ObjectMapper().writeValueAsString(respBean));
+//                        out.flush();
+//                        out.close();
+//                    }
+//                });
     }
 }
 
