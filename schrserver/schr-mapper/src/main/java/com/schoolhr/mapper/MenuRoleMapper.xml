@@ -3,10 +3,17 @@
 <mapper namespace="com.schoolhr.mapper.MenuRoleMapper">
     <insert id="insert"></insert>
     <insert id="insertSelective"></insert>
-    <insert id="insertRecord"></insert>
+    <insert id="insertRecord">
+        insert into menu_role (mid, rid) values
+        <foreach collection="mids" separator="," item="mid">
+        (#{mid},#{rid})
+        </foreach>
+    </insert>
     <update id="updateByPrimaryKeySelective"></update>
     <update id="updateByPrimaryKey"></update>
     <delete id="deleteByPrimaryKey"></delete>
-    <delete id="deleteByRid"></delete>
+    <delete id="deleteByRid">
+        delete from menu_role where rid=#{rid}
+    </delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.MenuRole"></select>
 </mapper>
