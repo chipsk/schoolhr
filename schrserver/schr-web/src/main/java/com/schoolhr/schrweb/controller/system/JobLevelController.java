@@ -1,33 +1,32 @@
-package com.schoolhr.schrweb.controller.system.basic;
+package com.schoolhr.schrweb.controller.system;
 
-import com.schoolhr.model.Position;
+import com.schoolhr.model.JobLevel;
 import com.schoolhr.model.RespBean;
-import com.schoolhr.sevice.PositionService;
+import com.schoolhr.sevice.JobLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/system/basic/pos")
-public class PositionController {
+@RequestMapping("/system/basic/joblevel")
+public class JobLevelController {
     @Autowired
-    PositionService positionService;
+    JobLevelService jobLevelService;
     @GetMapping("/")
-    public List<Position> getAllPositions(){
-        return positionService.getAllPositions();
+    public List<JobLevel> getAllJobLevels(){
+        return jobLevelService.getAllJobLevels();
     }
     @PostMapping("/")
-    //@RequestBody用来接收前端的JSON
-    public RespBean addPosition(@RequestBody Position position){
-        if (positionService.addPosition(position)==1){
+    public RespBean addPosition(@RequestBody JobLevel jobLevel){
+        if (jobLevelService.addJobLevel(jobLevel)==1){
             return RespBean.ok("添加成功");
         }
         return RespBean.error("添加失败");
     }
     @PutMapping("/")
-    public RespBean updatePosition(@RequestBody Position position){
-        if (positionService.updatePosition(position)==1){
+    public RespBean updatePosition(@RequestBody JobLevel jobLevel){
+        if (jobLevelService.updateJobLevel(jobLevel)==1){
             return RespBean.ok("更新成功");
         }
         return RespBean.error("更新失败");
@@ -35,14 +34,14 @@ public class PositionController {
 
     @DeleteMapping("/{id}")
     public RespBean deletePositionById(@PathVariable Integer id){
-        if (positionService.deletePositionById(id)==1){
+        if (jobLevelService.deleteJobLevelById(id)==1){
             return RespBean.ok("删除成功");
         }
         return RespBean.error("删除失败");
     }
     @DeleteMapping("/")
-    public RespBean deletePositionByIds(Integer[] ids){
-        if (positionService.deletePositionByIds(ids)==ids.length){
+    public RespBean deleteJobLevelByIds(Integer[] ids){
+        if (jobLevelService.deleteJobLevelsByIds(ids)==ids.length){
             return RespBean.ok("批量删除成功");
         }
         return RespBean.error("批量删除失败");
