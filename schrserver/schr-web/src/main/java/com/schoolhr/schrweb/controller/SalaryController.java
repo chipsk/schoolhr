@@ -24,6 +24,10 @@ public class SalaryController {
         return salaryService.getIDSalaries(userID);
     }
 
+    @GetMapping("/name/{username}")
+    public List<Salary> getnameSalaries(@PathVariable String username){
+        return salaryService.getnameSalaries(username);
+    }
     @PostMapping("/")
     public RespBean addSalary(@RequestBody Salary salary) {
         if (salaryService.addSalary(salary) == 1) {

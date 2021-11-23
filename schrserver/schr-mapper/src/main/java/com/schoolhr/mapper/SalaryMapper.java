@@ -21,4 +21,5 @@ public interface SalaryMapper {
 
     List<Salary> getAllSalaries();
     List<Salary> getIDSalaries(@Param("userID") Integer userID);
+    List<Salary> getnameSalaries(@Param("username") String username);
 }

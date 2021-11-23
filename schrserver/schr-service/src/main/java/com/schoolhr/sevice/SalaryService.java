@@ -18,6 +18,9 @@ public class SalaryService {
             return salaryMapper.getAllSalaries();
         }
 
+        public List<Salary> getnameSalaries(String username){
+            return salaryMapper.getnameSalaries(username);
+        }
         public List<Salary> getIDSalaries(Integer userID){
             return salaryMapper.getIDSalaries(userID);
         }
