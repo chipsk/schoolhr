@@ -1,4 +1,4 @@
-package com.schoolhr.schrweb.controller.system.basic;
+package com.schoolhr.schrweb.controller.system;
 
 import com.schoolhr.model.Menu;
 import com.schoolhr.model.RespBean;
