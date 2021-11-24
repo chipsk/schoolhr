@@ -1,4 +1,7 @@
 package com.schoolhr.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Salary {
@@ -9,7 +12,9 @@ public class Salary {
     private Integer basisSalary;
     private String allSalary;
     private String bonus;
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date adate;
     private String remark;
 
     public Integer getUid() {
@@ -40,8 +45,8 @@ public class Salary {
         return bonus;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getAdate() {
+        return adate;
     }
 
     public String getRemark() {
@@ -76,8 +81,9 @@ public class Salary {
         this.bonus = bonus;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+
+    public void setAdate(Date adate) {
+        this.adate = adate;
     }
 
     public void setRemark(String remark) {

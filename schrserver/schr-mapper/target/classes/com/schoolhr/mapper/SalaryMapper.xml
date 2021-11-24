@@ -1,14 +1,131 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.schoolhr.mapper.SalaryMapper">
+    <resultMap id="SalaryResultMap" type="com.schoolhr.model.Salary" >
+        <id column="uid" property="uid" jdbcType="INTEGER" />
+        <result column="userID" property="userID" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
+        <result column="allSalary" property="allSalary" jdbcType="VARCHAR" />
+        <result column="bonus" property="bonus" jdbcType="VARCHAR" />
+<!--        <result column="adate" property="adate" jdbcType="DATE" />-->
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Salary_Column_List" >
+        uid, userID, username, basisSalary, allSalary, bonus,adate, remark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="SalaryResultMap" resultType="com.schoolhr.model.Salary">
+        select
+        <include refid="Salary_Column_List" />
+        from salary
+        where uid = #{uid,jdbcType=INTEGER}
+    </select>
     <insert id="insert">
-
+    insert into salary(userID,username,departmentid,basisSalary,allSalary,bonus,remark)
+    values(#{userID},#{username},#{departmentid},#{basisSalary},#{allSalary},#{bonus},#{adate},#{remark})
     </insert>
-    <insert id="insertSelective"></insert>
-    <update id="updateByPrimaryKeySelective"></update>
-    <update id="updateByPrimaryKey"></update>
-    <delete id="deleteByPrimaryKey"></delete>
-    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Salary"></select>
+    <insert id="insertSelective" parameterType="com.schoolhr.model.Salary">
+        insert into salary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userID != null">
+                userID,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="departmentid != null">
+                departmentid,
+            </if>
+            <if test="basisSalary != null">
+                basisSalary,
+            </if>
+            <if test="allSalary != null">
+                allSalary,
+            </if>
+            <if test="bonus != null">
+                bonus,
+            </if>
+<!--            <if test="adate != null">-->
+<!--                adate,-->
+<!--            </if>-->
+           <if test="remark != null">
+               remark
+           </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userID != null">
+                #{userID,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="basisSalary != null">
+                #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="allSalary != null">
+                #{allSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="bonus != null">
+                #{bonus,jdbcType=VARCHAR},
+            </if>
+<!--            <if test="adate != null">-->
+<!--                #{adate,jdbcType=DATE},-->
+<!--            </if>-->
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.Salary">
+     update salary
+    <set>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="basisSalary != null">
+                basisSalary = #{basisSalary,jdbcType=INTEGER},
+            </if>
+             <if test="allSalary != null">
+                 allSalary = #{allSalary,jdbcType=VARCHAR},
+             </if>
+             <if test="bonus != null">
+                 bonus = #{bonus,jdbcType=VARCHAR},
+             </if>
+<!--             <if test="adate != null">-->
+<!--                 adate = #{adate,jdbcType=DATE},-->
+<!--             </if>-->
+             <if test="remark != null">
+                 remark = #{remark,jdbcType=VARCHAR}
+             </if>
+    </set>
+        where uid = #{uid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey">
+        update salary
+        set userID = #{userID,jdbcType=INTEGER},
+            username = #{username,jdbcType=VARCHAR},
+            departmentid = #{departmentid,jdbcType=INTEGER},
+            basisSalary = #{basisSalary,jdbcType=INTEGER},
+            allSalary = #{allSalary,jdbcType=VARCHAR},
+            bonus = #{bonus,jdbcType=VARCHAR},
+--             adate = #{adate,jdbcType=DATE},
+            remark = #{remark,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete from salary
+        where uid = #{uid,jdbcType=INTEGER}
+    </delete>
+
     <select id="getAllSalaries" resultType="com.schoolhr.model.Salary">
         Select * from salary
     </select>
@@ -18,5 +135,7 @@
     <select id="getnameSalaries" resultType="com.schoolhr.model.Salary">
         Select * from salary where username = #{username}
     </select>
+    <select id="getdepartSalaries" resultType="com.schoolhr.model.Salary"></select>
+
 
 </mapper>

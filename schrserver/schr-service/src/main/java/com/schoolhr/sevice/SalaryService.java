@@ -24,11 +24,12 @@ public class SalaryService {
             return salaryMapper.getIDSalaries(userID);
         }
         public Integer addSalary(Salary salary) {
+            salary.setAdate(new Date());
             return salaryMapper.insertSelective(salary);
         }
 
-        public Integer deleteSalaryById(Integer id) {
-            return salaryMapper.deleteByPrimaryKey(id);
+        public Integer deleteSalaryById(Integer uid) {
+            return salaryMapper.deleteByPrimaryKey(uid);
         }
 
         public Integer updateSalaryById(Salary salary) {
