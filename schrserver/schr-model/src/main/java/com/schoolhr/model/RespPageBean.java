@@ -2,7 +2,6 @@ package com.schoolhr.model;
 
 import java.util.List;
 
-
 public class RespPageBean {
     private Long total;
     private List<?> data;

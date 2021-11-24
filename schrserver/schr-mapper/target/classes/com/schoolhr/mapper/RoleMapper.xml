@@ -7,5 +7,7 @@
     <update id="updateByPrimaryKey"></update>
     <delete id="deleteByPrimaryKey"></delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Role"></select>
-    <select id="getAllRoles" resultType="com.schoolhr.model.Role"></select>
+    <select id="getAllRoles" resultType="com.schoolhr.model.Role">
+        select * from role;
+    </select>
 </mapper>

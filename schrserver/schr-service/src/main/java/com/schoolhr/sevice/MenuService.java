@@ -26,9 +26,25 @@ public class MenuService {
         return menuMapper.getMenusByHrId(((Hr) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
-
     //@Cacheable 缓存  后面再用
     public List<Menu> getAllMenusWithRole(){
         return menuMapper.getAllMenusWithRole();
     }
+
+    public List<Menu> getAllMenus() {
+        return menuMapper.getAllMenus();
+    }
+
+    public List<Integer> getMidsByRid(Integer rid) {
+        return menuMapper.getMidsByRid(rid);
+    }
+
+    @Transactional
+    public boolean updateMenuRole(Integer rid, Integer[] mids) {
+        menuRoleMapper.deleteByRid(rid);
+        Integer result=menuRoleMapper.insertRecord(rid,mids);
+
+        return result==mids.length;
+    }
+
 }
