@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.EmpInfoMapper">
+
+
+    <insert id="insert"></insert>
+    <insert id="insertSelective">
+--         insert into employee where
+    </insert>
+    <insert id="addEmps"></insert>
+    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKey"></update>
+    <update id="updateEmployeeSalaryById"></update>
+    <update id="maxWorkID"></update>
+    <update id="updatesalary">
+    UPDATE employee SET basisSalary=#{basisSalary} WHERE userID=#{userID}
+    </update>
+    <update id="updateWorkStatus">
+        update employee set workstatus=#{workstatus} where userID=#{userID}
+    </update>
+    <update id="updateJoblevel">
+        update employee set joblevel=#{joblevel} where userID=#{userID}
+    </update>
+    <delete id="deleteEmpByEid">
+        delete from employee where userID=#{id}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
+    <select id="getEmployeeByPage" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
+    <select id="getTotal" resultType="java.lang.Long">
+--         select * from employee_info;
+    </select>
+    <select id="getEmployeeById" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        select * from employee where departmentid=#{id,jdbcType=INTEGER}
+    </select>
+    <select id="getEmployeeByPageWithSalary" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
+    <select id="getAllEmployee" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        Select * from employee
+    </select>
+    <select id="getSalaryByid" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        select userID,username,basisSalary from employee where userID=#{id}
+    </select>
+    <select id="getAllDepartments" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        select userID,username ,departmentid from employee_info
+    </select>
+    <select id="getAllsalary" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        select userID,username,basisSalary from employee_info
+    </select>
+    <select id="getEmDep" resultType="com.schoolhr.model.Personnel.EmpInfo">
+        select userID,username,workstatus,departmentid,joblevel from employee
+    </select>
+</mapper>

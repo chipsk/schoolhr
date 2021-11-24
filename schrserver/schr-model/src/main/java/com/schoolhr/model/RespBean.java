@@ -11,6 +11,7 @@ public class RespBean {
     }
 
     public static RespBean ok(String msg) {
+
         return new RespBean(200, msg, null);
     }
 

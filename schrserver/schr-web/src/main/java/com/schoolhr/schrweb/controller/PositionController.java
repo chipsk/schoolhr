@@ -15,6 +15,7 @@ public class PositionController {
     PositionService positionService;
     @GetMapping("/")
     public List<Position> getAllPositions(){
+
         return positionService.getAllPositions();
     }
     @PostMapping("/")
