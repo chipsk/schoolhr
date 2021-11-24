@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.EmployeeMapper">
+    <insert id="insert"></insert>
+    <insert id="insertSelective">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userID != null">
+                userID,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="userSex != null">
+                userSex,
+            </if>
+            <if test="IDcard != null">
+                IDcard,
+            </if>
+            <if test="politic != null">
+                politic,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="basisSalary != null">
+                basisSalary,
+            </if>
+            <if test="workstatus != null">
+                workstatus,
+            </if>
+            <if test="E_mail != null">
+                E_mail,
+            </if>
+
+            <if test="departmentid != null">
+                departmentid,
+            </if>
+            <if test="joblevel != null">
+                joblevel,
+            </if>
+            <if test="contractTime != null">
+                contractTime,
+            </if>
+            <if test="beginworkDate != null">
+                beginworkDate,
+            </if>
+            <if test="endworkDate != null">
+                endworkDate,
+            </if>
+            <if test="birthday != null">
+                brithday,
+            </if>
+            <if test="positionid != null">
+                positionid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=Integer},
+            </if>
+            <if test="userID != null">
+                #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                #{userSex,jdbcType=CHAR},
+            </if>
+            <if test="IDcard != null">
+                #{IDcard,jdbcType=VARCHAR},
+            </if>
+            <if test="politic != null">
+                #{politic,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="basisSalary != null">
+                #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="workstatus != null">
+                #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="E_mail != null">
+                #{E_mail,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="contractTime != null">
+                #{contractTime,jdbcType=DOUBLE},
+            </if>
+            <if test="beginworkDate != null">
+                #{beginworkDate,jdbcType=DATE},
+            </if>
+            <if test="endworkDate != null">
+                #{endworkDate,jdbcType=DATE},
+            </if>
+
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="positionid != null">
+                #{positionid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <insert id="addEmps">
+        insert into employee (userID, username,
+        userSex, IDcard, politic, phone,
+        address, basisSalary, workstatus,
+        E_mail, departmentid, joblevel, constractTime, beginworkDate,
+        endworkDate, birthday, positionid)
+        values
+        <foreach collection="list" separator="," item="emp">
+            (#{emp.userID,jdbcType=Integer}, #{emp.username,jdbcType=VARCHAR},
+            #{emp.userSex,jdbcType=CHAR}, #{emp.IDcard,jdbcType=VARCHAR}, #{emp.politic,jdbcType=VARCHAR},
+            #{emp.phone,jdbcType=VARCHAR}, #{emp.address,jdbcType=VARCHAR}, #{emp.basisSalary,jdbcType=INTEGER}, #{emp.workstatus,jdbcType=VARCHAR},
+            #{emp.E_mail,jdbcType=VARCHAR}, #{emp.departmentid,jdbcType=INTEGER}, #{emp.joblevel,jdbcType=VARCHAR},
+            #{emp.constractTime,jdbcType=DOUBLE}, #{emp.beginworkDate,jdbcType=DATE}, #{emp.endworkDate,jdbcType=DATE},
+            #{emp.birthday,jdbcType=DATE}, #{emp.positionid,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKey"></update>
+    <update id="updateEmployeeSalaryById"></update>
+    <delete id="deleteByPrimaryKey"></delete>
+    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
+    <select id="getEmployeeByPage" resultType="com.schoolhr.model.Employee">
+        select e.*,d.`id` as did,d.`name` as dname,pos.`id` as posid,pos.`name` as posname from employee e,department d,position pos where e.`departmentid`=d.`id` and e.`positionid`=pos.`id`
+    </select>
+    <select id="getTotal" resultType="java.lang.Long">
+        select count(*) from employee e
+        <where>
+            <if test="emp!=null">
+                <if test="emp.username !=null and emp.username!=''">
+                    and e.username like concat('%',#{emp.username},'%')
+                </if>
+            </if>
+            <if test="beginDateScope !=null">
+                and e.beginworkDate between #{beginDateScope[0]} and #{beginDateScope[1]}
+            </if>
+        </where>
+    </select>
+    <select id="getEmployeeById" resultType="com.schoolhr.model.Employee">
+        select e.*,d.`id` as did,d.`name` as dname,pos.`id` as posid,pos.`name` as posname from employee e,department d,position pos where
+        e.`departmentid`=d.`id` and e.`positionid`=pos.`id` and e.`id`=#{id}
+    </select>
+    <select id="getEmployeeByPageWithSalary" resultType="com.schoolhr.model.Employee"></select>
+    <select id="maxWorkID" resultType="java.lang.Integer"></select>
+</mapper>

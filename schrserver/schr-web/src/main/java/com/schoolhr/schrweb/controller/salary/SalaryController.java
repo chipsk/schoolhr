@@ -1,4 +1,4 @@
-package com.schoolhr.schrweb.controller;
+package com.schoolhr.schrweb.controller.salary;
 
 import com.schoolhr.model.Position;
 import com.schoolhr.model.RespBean;

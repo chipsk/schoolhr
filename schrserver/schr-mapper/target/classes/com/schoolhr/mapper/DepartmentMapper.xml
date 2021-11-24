@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="com.schoolhr.model.Department">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="parentId" property="parentId" jdbcType="INTEGER"/>
         <result column="depPath" property="depPath" jdbcType="VARCHAR"/>
         <result column="enabled" property="enabled" jdbcType="BIT"/>
@@ -15,7 +16,7 @@
         <collection property="children" ofType="com.schoolhr.model.Department"
                     select="com.schoolhr.mapper.DepartmentMapper.getAllDepartmentsByParentId" column="id"/>
     </resultMap>
-    
+
     <select id="deleteDepById" statementType="CALLABLE">
         /*调用存储过程deleteDep*/
     call deleteDep(#{id ,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
@@ -28,5 +29,15 @@
 
     <select id="getAllDepartmentsByParentId" resultMap="DepartmentWithChildren">
         select * from department where parentId=#{pid}
+    </select>
+
+    <sql id="Base_Column_List">
+        id, name, address, parentId, depPath, enabled, isParent
+    </sql>
+    <select id="getAllDepartmentsWithOutChildren" resultType="com.schoolhr.model.Department">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from department;
     </select>
 </mapper>
