@@ -1,22 +1,13 @@
 package com.schoolhr.schrweb.controller;
 
-import com.schoolhr.mapper.EmpInfoMapper;
-import com.schoolhr.model.Department;
 import com.schoolhr.model.Personnel.EmpInfo;
-import com.schoolhr.model.Position;
 import com.schoolhr.model.RespBean;
-import com.schoolhr.model.RespPageBean;
-import com.schoolhr.sevice.DepartmentService;
 import com.schoolhr.sevice.EmpInfoService;
 import com.schoolhr.sevice.PositionService;
 //import com.schoolhr.utils.POIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,8 +15,7 @@ import java.util.List;
 public class EmpInfoController {
     @Autowired
     EmpInfoService empInfoService;
-    @Autowired
-    DepartmentService departmentService;
+
     @Autowired
     PositionService positionService;
 
