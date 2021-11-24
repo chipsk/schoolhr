@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface SalaryMapper {
 
-    int deleteByPrimaryKey(Integer uid);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Salary record);
 
     int insertSelective(Salary record);
 
-    Salary selectByPrimaryKey(Integer uid);
+    Salary selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Salary record);
 

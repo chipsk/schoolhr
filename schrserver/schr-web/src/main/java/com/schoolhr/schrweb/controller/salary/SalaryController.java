@@ -28,7 +28,16 @@ public class SalaryController {
     public List<Salary> getnameSalaries(@PathVariable String username){
         return salaryService.getnameSalaries(username);
     }
-    @PostMapping("/add/")
+
+//    @PostMapping("/")
+//    public RespBean insertSalary(@RequestBody Salary salary) {
+//        if (salaryService.insertSalary(salary) == 1) {
+//            return RespBean.ok("添加成功!");
+//        }
+//        return RespBean.error("添加失败!");
+//    }
+
+    @PostMapping("/")
     public RespBean addSalary(@RequestBody Salary salary) {
         if (salaryService.addSalary(salary) == 1) {
             return RespBean.ok("添加成功!");

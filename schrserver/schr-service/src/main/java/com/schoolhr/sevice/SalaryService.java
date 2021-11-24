@@ -5,6 +5,7 @@ import com.schoolhr.model.Salary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,8 +29,13 @@ public class SalaryService {
             return salaryMapper.insertSelective(salary);
         }
 
-        public Integer deleteSalaryById(Integer uid) {
-            return salaryMapper.deleteByPrimaryKey(uid);
+        public Integer insertSalary(Salary salary) {
+            salary.setAdate(new Date());
+            return salaryMapper.insert(salary);
+        }
+
+        public Integer deleteSalaryById(Integer id) {
+            return salaryMapper.deleteByPrimaryKey(id);
         }
 
         public Integer updateSalaryById(Salary salary) {
