@@ -13,7 +13,7 @@ public interface SalaryMapper {
 
     int insertSelective(Salary record);
 
-    Salary selectByPrimaryKey(Integer id);
+    Salary selectByPrimaryKey(Integer uid);
 
     int updateByPrimaryKeySelective(Salary record);
 
@@ -22,4 +22,5 @@ public interface SalaryMapper {
     List<Salary> getAllSalaries();
     List<Salary> getIDSalaries(@Param("userID") Integer userID);
     List<Salary> getnameSalaries(@Param("username") String username);
+    List<Salary> getdepartSalaries(@Param("departmentID") Integer departmentid,@Param("name") String name);
 }
