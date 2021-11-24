@@ -5,21 +5,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Salary {
-//    private static final long serialVersionUID = -1242493306307174690L;
-    private Integer uid;
+    private Integer id;
     private Integer userID;
     private String username;
     private Integer departmentid;
     private Integer basisSalary;
     private String allSalary;
     private String bonus;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date adate;
+
     private String remark;
 
-    public Integer getUid() {
-        return uid;
+    public Integer getId() {
+        return id;
     }
 
     public Integer getUserID() {
@@ -54,8 +54,8 @@ public class Salary {
         return remark;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setUserID(Integer userID) {

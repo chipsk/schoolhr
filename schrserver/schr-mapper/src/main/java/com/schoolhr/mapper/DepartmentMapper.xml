@@ -30,4 +30,14 @@
     <select id="getAllDepartmentsByParentId" resultMap="DepartmentWithChildren">
         select * from department where parentId=#{pid}
     </select>
+
+    <sql id="Base_Column_List">
+        id, name, address, parentId, depPath, enabled, isParent
+    </sql>
+    <select id="getAllDepartmentsWithOutChildren" resultType="com.schoolhr.model.Department">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from department;
+    </select>
 </mapper>
