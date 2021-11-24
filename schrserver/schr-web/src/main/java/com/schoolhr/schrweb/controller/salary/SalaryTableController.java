@@ -1,35 +1,17 @@
 package com.schoolhr.schrweb.controller.salary;
 
-import com.schoolhr.model.Position;
 import com.schoolhr.model.RespBean;
 import com.schoolhr.model.Salary;
 import com.schoolhr.sevice.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/salary")
-public class SalaryController {
+@RequestMapping("/salary/table")
+public class SalaryTableController {
     @Autowired
     SalaryService salaryService;
-
-    @GetMapping("/search")
-    public List<Salary> getAllSalaries() {
-        return salaryService.getAllSalaries();
-    }
-    @GetMapping("/search/{userID}")
-    public List<Salary> getIDSalaries(@PathVariable Integer userID) {
-        return salaryService.getIDSalaries(userID);
-    }
-
-    @GetMapping("/search/name/{username}")
-    public List<Salary> getnameSalaries(@PathVariable String username){
-        return salaryService.getnameSalaries(username);
-    }
-
-//    @PostMapping("/")
+    //    @PostMapping("/")
 //    public RespBean insertSalary(@RequestBody Salary salary) {
 //        if (salaryService.insertSalary(salary) == 1) {
 //            return RespBean.ok("添加成功!");
@@ -45,7 +27,7 @@ public class SalaryController {
         return RespBean.error("添加失败!");
     }
 
-    @DeleteMapping("/{uid}")
+    @DeleteMapping("/{id}")
     public RespBean deleteSalaryById(@PathVariable Integer uid) {
         if (salaryService.deleteSalaryById(uid) == 1) {
             return RespBean.ok("删除成功！");
@@ -53,7 +35,7 @@ public class SalaryController {
         return RespBean.error("删除失败！");
     }
 
-    @PutMapping("/update/")
+    @PutMapping("/")
     public RespBean updateSalaryById(@RequestBody Salary salary) {
         if (salaryService.updateSalaryById(salary) == 1) {
             return RespBean.ok("更新成功!");
