@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Salary {
+//    private static final long serialVersionUID = -1242493306307174690L;
     private Integer uid;
     private Integer userID;
     private String username;

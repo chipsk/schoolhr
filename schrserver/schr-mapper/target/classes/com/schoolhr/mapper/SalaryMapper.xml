@@ -8,7 +8,7 @@
         <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
         <result column="allSalary" property="allSalary" jdbcType="VARCHAR" />
         <result column="bonus" property="bonus" jdbcType="VARCHAR" />
-<!--        <result column="adate" property="adate" jdbcType="DATE" />-->
+        <result column="adate" property="adate" jdbcType="DATE" />
         <result column="remark" property="remark" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Salary_Column_List" >
@@ -21,7 +21,7 @@
         where uid = #{uid,jdbcType=INTEGER}
     </select>
     <insert id="insert">
-    insert into salary(userID,username,departmentid,basisSalary,allSalary,bonus,remark)
+    insert into salary(userID,username,departmentid,basisSalary,allSalary,adate,bonus,remark)
     values(#{userID},#{username},#{departmentid},#{basisSalary},#{allSalary},#{bonus},#{adate},#{remark})
     </insert>
     <insert id="insertSelective" parameterType="com.schoolhr.model.Salary">
@@ -45,9 +45,9 @@
             <if test="bonus != null">
                 bonus,
             </if>
-<!--            <if test="adate != null">-->
-<!--                adate,-->
-<!--            </if>-->
+            <if test="adate != null">
+                adate,
+            </if>
            <if test="remark != null">
                remark
            </if>
@@ -71,9 +71,9 @@
             <if test="bonus != null">
                 #{bonus,jdbcType=VARCHAR},
             </if>
-<!--            <if test="adate != null">-->
-<!--                #{adate,jdbcType=DATE},-->
-<!--            </if>-->
+            <if test="adate != null">
+                #{adate,jdbcType=DATE},
+            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR}
             </if>
@@ -100,9 +100,9 @@
              <if test="bonus != null">
                  bonus = #{bonus,jdbcType=VARCHAR},
              </if>
-<!--             <if test="adate != null">-->
-<!--                 adate = #{adate,jdbcType=DATE},-->
-<!--             </if>-->
+             <if test="adate != null">
+                 adate = #{adate,jdbcType=DATE},
+             </if>
              <if test="remark != null">
                  remark = #{remark,jdbcType=VARCHAR}
              </if>
