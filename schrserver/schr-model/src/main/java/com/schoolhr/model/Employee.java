@@ -10,18 +10,34 @@ public class Employee implements Serializable {
     private String userID;
     private String username;
     private String userSex;
-    private String IDcard;
+    private String idCard;
     private String politic;
     private String phone;
     private String address;
     private String basisSalary;
     private String workstatus;
-    private String E_mail;
+    private String e_mail;
     private Integer departmentid;
     private String joblevel;
     private Integer positionid;
+    private String dname;
+    private String posname;
 
+    public String getDname() {
+        return dname;
+    }
 
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
+    public String getPosname() {
+        return posname;
+    }
+
+    public void setPosname(String posname) {
+        this.posname = posname;
+    }
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date birthday;
@@ -71,9 +87,6 @@ public class Employee implements Serializable {
         return userSex;
     }
 
-    public String getIDcard() {
-        return IDcard;
-    }
 
     public String getPolitic() {
         return politic;
@@ -92,9 +105,6 @@ public class Employee implements Serializable {
     }
 
 
-    public String getE_mail() {
-        return E_mail;
-    }
 
     public int getDepartmentid() {
         return departmentid;
@@ -128,9 +138,7 @@ public class Employee implements Serializable {
         this.userSex = userSex;
     }
 
-    public void setIDcard(String IDcard) {
-        this.IDcard = IDcard;
-    }
+
 
     public void setPolitic(String politic) {
         this.politic = politic;
@@ -152,8 +160,12 @@ public class Employee implements Serializable {
         this.departmentid = departmentid;
     }
 
+    public String getE_mail() {
+        return e_mail;
+    }
+
     public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+        this.e_mail = e_mail;
     }
 
     public void setJoblevel(String joblevel) {
@@ -176,6 +188,18 @@ public class Employee implements Serializable {
         this.endworkDate = endworkDate;
     }
 
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public void setDepartmentid(Integer departmentid) {
+        this.departmentid = departmentid;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -183,13 +207,13 @@ public class Employee implements Serializable {
                 ", userID='" + userID + '\'' +
                 ", username='" + username + '\'' +
                 ", userSex='" + userSex + '\'' +
-                ", IDcard='" + IDcard + '\'' +
+                ", idCard='" + idCard + '\'' +
                 ", politic='" + politic + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", basisSalary='" + basisSalary + '\'' +
                 ", workstatus='" + workstatus + '\'' +
-                ", E_mail='" + E_mail + '\'' +
+                ", e_mail='" + e_mail + '\'' +
                 ", departmentid=" + departmentid +
                 ", joblevel='" + joblevel + '\'' +
                 ", positionid=" + positionid +

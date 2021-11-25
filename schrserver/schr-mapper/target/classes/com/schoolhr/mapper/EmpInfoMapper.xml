@@ -13,7 +13,13 @@
     <update id="updateEmployeeSalaryById"></update>
     <update id="maxWorkID"></update>
     <update id="updatesalary">
-    UPDATE employee_info SET basisSalary=#{basisSalary} WHERE userID=#{userID}
+    UPDATE employee SET basisSalary=#{basisSalary} WHERE userID=#{userID}
+    </update>
+    <update id="updateWorkStatus">
+        update employee set workstatus=#{workstatus} where userID=#{userID}
+    </update>
+    <update id="updateJoblevel">
+        update employee set joblevel=#{joblevel} where userID=#{userID}
     </update>
     <delete id="deleteEmpByEid">
         delete from employee where userID=#{id}

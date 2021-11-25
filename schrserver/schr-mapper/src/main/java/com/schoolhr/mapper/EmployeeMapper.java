@@ -23,7 +23,7 @@ public interface EmployeeMapper {
 
     Long getTotal(@Param("emp") Employee employee,@Param("beginDateScope") Date[] beginDateScope);
 
-    Integer maxWorkID();
+    Integer maxuserID();
 
     Integer addEmps(@Param("list") List<Employee> list);
 

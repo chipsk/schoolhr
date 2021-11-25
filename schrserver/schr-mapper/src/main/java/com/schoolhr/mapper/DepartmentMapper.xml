@@ -40,4 +40,7 @@
         </include>
         from department;
     </select>
+    <select id="getAllDepartmentsWithNone" resultType="com.schoolhr.model.Department">
+        select * from department;
+    </select>
 </mapper>

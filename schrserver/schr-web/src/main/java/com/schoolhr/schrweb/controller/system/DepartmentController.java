@@ -20,6 +20,12 @@ public class DepartmentController {
     public List<Department> getAllDepartments(){
         return departmentService.getAllDepartments();
     }
+
+    @GetMapping("/all")
+    public List<Department> getAllDepartmentsWithNone(){
+        return departmentService.getAllDepartmentsWithNone();
+    }
+
     @PostMapping("/")
     public RespBean addDep(@RequestBody Department dep){
         departmentService.addDep(dep);
