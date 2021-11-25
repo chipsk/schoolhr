@@ -14,6 +14,7 @@ public class PositionService {
     PositionMapper positionMapper;
 
     public List<Position> getAllPositions() {
+
         return positionMapper.getAllPositions();
     }
 

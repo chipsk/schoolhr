@@ -1,67 +1,39 @@
-package com.schoolhr.model;
+package com.schoolhr.model.Personnel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Employee implements Serializable {
+public class EmpInfo {
     private Integer id;
-    private String userID;
+    private Integer userID;
     private String username;
     private String userSex;
-    private String idCard;
+    private String IDcard;
     private String politic;
     private String phone;
     private String address;
-    private String basisSalary;
+    private Integer basisSalary;
     private String workstatus;
-    private String e_mail;
-    private Integer departmentid;
+    private String E_mail;
+    private int departmentid;
     private String joblevel;
-    private Integer positionid;
-    private String dname;
-    private String posname;
-
-    public String getDname() {
-        return dname;
-    }
-
-    public void setDname(String dname) {
-        this.dname = dname;
-    }
-
-    public String getPosname() {
-        return posname;
-    }
-
-    public void setPosname(String posname) {
-        this.posname = posname;
-    }
-
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    private Date birthday;
-
-
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    private Double contractTime;
-
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-
-
+    private Integer contractTime;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date beginworkDate;
-
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private Date birthday;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date endworkDate;
+    private int positionid;
+
+    public int getPositionid() {
+        return positionid;
+    }
+
+    public void setPositionid(int positionid) {
+        this.positionid = positionid;
+    }
 
     public String getWorkstatus() {
         return workstatus;
@@ -75,7 +47,7 @@ public class Employee implements Serializable {
         return id;
     }
 
-    public String getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
@@ -87,6 +59,9 @@ public class Employee implements Serializable {
         return userSex;
     }
 
+    public String getIDcard() {
+        return IDcard;
+    }
 
     public String getPolitic() {
         return politic;
@@ -100,21 +75,30 @@ public class Employee implements Serializable {
         return address;
     }
 
-    public String getBasisSalary() {
+    public Integer getBasisSalary() {
         return basisSalary;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
 
+
+    public Date getEndworkDate() {
+        return endworkDate;
+    }
+
+    public String getE_mail() {
+        return E_mail;
+    }
 
     public int getDepartmentid() {
         return departmentid;
     }
 
-    public String getJoblevel() {
-        return joblevel;
-    }
+    public String getJoblevel() { return joblevel; }
 
-    public Double getContractTime() {
+    public Integer getContractTime() {
         return contractTime;
     }
 
@@ -126,7 +110,7 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
@@ -138,7 +122,9 @@ public class Employee implements Serializable {
         this.userSex = userSex;
     }
 
-
+    public void setIDcard(String IDcard) {
+        this.IDcard = IDcard;
+    }
 
     public void setPolitic(String politic) {
         this.politic = politic;
@@ -152,7 +138,7 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public void setBasisSalary(String basisSalary) {
+    public void setBasisSalary(Integer basisSalary) {
         this.basisSalary = basisSalary;
     }
 
@@ -160,76 +146,52 @@ public class Employee implements Serializable {
         this.departmentid = departmentid;
     }
 
-    public String getE_mail() {
-        return e_mail;
-    }
-
     public void setE_mail(String e_mail) {
-        this.e_mail = e_mail;
+        E_mail = e_mail;
     }
 
     public void setJoblevel(String joblevel) {
         this.joblevel = joblevel;
     }
 
+    public void setContractTime(Integer contractTime) {
+        this.contractTime = contractTime;
+    }
+
     public void setBeginworkDate(Date beginworkDate) {
         this.beginworkDate = beginworkDate;
     }
 
-    public void setContractTime(Double contractTime) {
-        this.contractTime = contractTime;
-    }
-
-    public Date getEndworkDate() {
-        return endworkDate;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public void setEndworkDate(Date endworkDate) {
         this.endworkDate = endworkDate;
     }
 
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
-    }
-
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EmpInfo{" +
                 "id=" + id +
-                ", userID='" + userID + '\'' +
+                ", userID=" + userID +
                 ", username='" + username + '\'' +
                 ", userSex='" + userSex + '\'' +
-                ", idCard='" + idCard + '\'' +
+                ", IDcard='" + IDcard + '\'' +
                 ", politic='" + politic + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", basisSalary='" + basisSalary + '\'' +
+                ", basisSalary=" + basisSalary +
                 ", workstatus='" + workstatus + '\'' +
-                ", e_mail='" + e_mail + '\'' +
+                ", E_mail='" + E_mail + '\'' +
                 ", departmentid=" + departmentid +
                 ", joblevel='" + joblevel + '\'' +
-                ", positionid=" + positionid +
-                ", birthday=" + birthday +
                 ", contractTime=" + contractTime +
                 ", beginworkDate=" + beginworkDate +
+                ", birthday=" + birthday +
                 ", endworkDate=" + endworkDate +
+                ", positionid=" + positionid +
                 '}';
-    }
-
-    public Integer getPositionid() {
-        return positionid;
-    }
-
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
     }
 }
 

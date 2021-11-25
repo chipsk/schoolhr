@@ -28,4 +28,8 @@ public class DepartmentService {
     public List<Department> getAllDepartmentsWithOutChildren() {
         return departmentMapper.getAllDepartmentsWithOutChildren();
     }
+
+    public List<Department> getAllDepartmentsWithNone() {
+        return departmentMapper.getAllDepartmentsWithNone();
+    }
 }

@@ -2,9 +2,10 @@ package com.schoolhr.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Salary {
+public class Salary implements Serializable {
     private Integer id;
     private Integer userID;
     private String username;

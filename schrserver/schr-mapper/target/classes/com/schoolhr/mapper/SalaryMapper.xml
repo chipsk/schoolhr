@@ -140,6 +140,18 @@
         Select * from salary where username = #{username}
     </select>
     <select id="getdepartSalaries" resultType="com.schoolhr.model.Salary"></select>
+    <select id="getSalariesByPage" resultType="com.schoolhr.model.Salary">
+        Select * from salary where 1=1
+        <if test="sal.username !=null and sal.username!=''">
+            and username like concat('%',#{sal.username},'%')
+        </if>
+        <if test="sal.userID !=null">
+            and userID =#{sal.userID}
+        </if>
+        <if test="page !=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
 
 
 </mapper>

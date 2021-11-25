@@ -143,7 +143,7 @@ public class POIUtils {
             row.createCell(1).setCellValue(emp.getUserID());
             row.createCell(2).setCellValue(emp.getUsername());
             row.createCell(3).setCellValue(emp.getUserSex());
-            row.createCell(4).setCellValue(emp.getIDcard());
+            row.createCell(4).setCellValue(emp.getIdCard());
             row.createCell(5).setCellValue(emp.getPolitic());
             row.createCell(6).setCellValue(emp.getPhone());
             row.createCell(7).setCellValue(emp.getAddress());
@@ -230,7 +230,7 @@ public class POIUtils {
                                         employee.setUserSex(cellValue);
                                         break;
                                     case 5:
-                                        employee.setIDcard(cellValue);
+                                        employee.setIdCard(cellValue);
                                         break;
                                     case 6:
                                         employee.setPolitic(cellValue);

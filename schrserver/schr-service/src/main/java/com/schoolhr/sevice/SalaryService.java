@@ -1,6 +1,7 @@
 package com.schoolhr.sevice;
 
 import com.schoolhr.mapper.SalaryMapper;
+import com.schoolhr.model.RespPageBean;
 import com.schoolhr.model.Salary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,20 @@ public class SalaryService {
         @Autowired
         SalaryMapper salaryMapper;
 
-        public List<Salary> getAllSalaries() {
-            return salaryMapper.getAllSalaries();
+        public RespPageBean getSalariesByPage(Integer page, Integer size, Salary salary, Date[] beginDateScope) {
+            if (page != null && size != null) {
+                page = (page - 1) * size;
+            }
+            List<Salary> data = salaryMapper.getSalariesByPage(page, size, salary, beginDateScope);
+            RespPageBean bean = new RespPageBean();
+            bean.setData(data);
+            return bean;
         }
 
         public List<Salary> getnameSalaries(String username){
             return salaryMapper.getnameSalaries(username);
         }
+
         public List<Salary> getIDSalaries(Integer userID){
             return salaryMapper.getIDSalaries(userID);
         }
