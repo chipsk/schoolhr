@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.EmpWithSalaryMapper">
+
+    <resultMap id="BaseResultMap" type="com.schoolhr.model.Employee">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userID" property="userID" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="userSex" property="userSex" jdbcType="CHAR" />
+        <result column="idCard" property="idCard" jdbcType="VARCHAR" />
+        <result column="politic" property="politic" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
+        <result column="workstatus" property="workstatus" jdbcType="VARCHAR" />
+        <result column="e_mail" property="e_mail" jdbcType="VARCHAR" />
+        <result column="departmentid" property="departmentid" jdbcType="INTEGER" />
+        <result column="joblevel" property="joblevel" jdbcType="VARCHAR" />
+        <result column="contractTime" property="contractTime" jdbcType="DOUBLE" />
+        <result column="beginworkDate" property="beginworkDate" jdbcType="DATE" />
+        <result column="endworkDate" property="endworkDate" jdbcType="DATE" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="positionid" property="positionid" jdbcType="INTEGER" />
+
+    </resultMap>
+    <resultMap id="SalaryAccountMap" type="com.schoolhr.model.Employee" extends="BaseResultMap">
+        <association property="departmentid" javaType="com.schoolhr.model.SalaryAccount">
+            <id column="id" property="id" jdbcType="INTEGER"/>
+            <result column="basisSalary" property="basisSalary" jdbcType="INTEGER"/>
+            <result column="bonus" property="bonus" jdbcType="VARCHAR"/>
+            <result column="lunchSalary" property="lunchSalary" jdbcType="INTEGER"/>
+            <result column="trafficSalary" property="trafficSalary" jdbcType="INTEGER"/>
+            <result column="allSalary" property="allSalary" jdbcType="VARCHAR"/>
+            <result column="socialBase" property="socialBase" jdbcType="INTEGER"/>
+            <result column="socialPer" property="socialPer" jdbcType="REAL"/>
+            <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+            <result column="medicalBase" property="medicalBase" jdbcType="INTEGER"/>
+            <result column="medicalPer" property="medicalPer" jdbcType="REAL"/>
+            <result column="accumulationFundBase" property="accumulationFundBase" jdbcType="INTEGER"/>
+            <result column="accumulationFundPer" property="accumulationFundPer" jdbcType="REAL"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id,userID,username,idCard,phone,e_mail,basisSalary,name
+    </sql>
+    <insert id="insert"></insert>
+    <insert id="insertSelective"></insert>
+    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKey"></update>
+    <delete id="deleteByPrimaryKey"></delete>
+    <select id="getAllSalaryAccounts" resultMap="SalaryAccountMap">
+        select e.`id`,e.userID,e.username,e.userSex,e.idCard,e.politic,e.phone,e.address,e.basisSalary,e.workstatus,e.e_mail,e.departmentid,e.joblevel,
+               e.contractTime,e.beginworkDate,e.endworkDate,e.birthday,e.positionid,sa.`name`
+        from employee e LEFT JOIN salaryaccount sa ON e.departmentid=sa.departmentid
+        where 1=1
+        <if test="emps.username !=null and emps.username!=''">
+            and username like concat('%',#{emps.username},'%')
+        </if>
+        <if test="emps.userID !=null">
+            and userID =#{emps.userID}
+        </if>
+        <if test="page !=null and size!=null">
+            limit #{page},#{size}
+        </if>
+
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
+<!--    <select id="getTotal" resultType="java.lang.Long">-->
+<!--        select count(*) from employee e-->
+<!--        <where>-->
+<!--            <if test="emp!=null">-->
+<!--                <if test="emp.name !=null and emp.name!=''">-->
+<!--                    and e.username like concat('%',#{emp.username},'%')-->
+<!--                </if>-->
+<!--                <if test="emp.politicId !=null">-->
+<!--                    and e.userID =#{emp.userID}-->
+<!--                </if>-->
+<!--                <if test="emp.nationId !=null">-->
+<!--                    and e.idCard =#{emp.idCard}-->
+<!--                </if>-->
+<!--                <if test="emp.jobLevelId !=null">-->
+<!--                    and e.phone =#{emp.phone}-->
+<!--                </if>-->
+<!--                <if test="emp.departmentId !=null">-->
+<!--                    and e.e_mail =#{emp.e_mail}-->
+<!--                </if>-->
+<!--                <if test="emp.engageForm !=null and emp.engageForm!=''">-->
+<!--                    and e.basisSalary =#{emp.basisSalary}-->
+<!--                </if>-->
+
+<!--            </if>-->
+<!--            <if test="beginDateScope !=null">-->
+<!--                and e.beginDate between #{beginDateScope[0]} and #{beginDateScope[1]}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+</mapper>
