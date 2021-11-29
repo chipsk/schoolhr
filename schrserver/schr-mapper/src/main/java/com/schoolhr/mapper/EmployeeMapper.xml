@@ -135,7 +135,63 @@
             #{emp.birthday,jdbcType=DATE}, #{emp.positionid,jdbcType=INTEGER})
         </foreach>
     </insert>
-    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKeySelective">
+        update employee
+        <set>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                userSex = #{userSex,jdbcType=CHAR},
+            </if>
+            <if test="idCard != null">
+                idCard = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="politic != null">
+                politic = #{politic,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="basisSalary != null">
+                basisSalary = #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="e_mail != null">
+                e_mail = #{e_mail,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="contractTime != null">
+                contractTime = #{contractTime,jdbcType=DOUBLE},
+            </if>
+            <if test="beginworkDate != null">
+                beginworkDate = #{beginworkDate,jdbcType=DATE},
+            </if>
+            <if test="endworkDate != null">
+                endworkDate = #{endworkDate,jdbcType=DATE},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
     <update id="updateByPrimaryKey"></update>
     <update id="updateEmployeeSalaryById"></update>
     <delete id="deleteByPrimaryKey">

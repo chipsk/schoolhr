@@ -10,6 +10,8 @@ public interface SalaryMapper {
 
     int deleteByPrimaryKey(Integer id);
 
+    Integer deleteSalariesByIds(@Param("ids") Integer[] ids);
+
     int insert(Salary record);
 
     int insertSelective(Salary record);

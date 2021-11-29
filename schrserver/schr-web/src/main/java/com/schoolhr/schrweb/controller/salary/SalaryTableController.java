@@ -22,18 +22,26 @@ public class SalaryTableController {
 
     @PostMapping("/")
     public RespBean addSalary(@RequestBody Salary salary) {
-        if (salaryService.addSalary(salary) == 1) {
+        if (salaryService.insertSalary(salary) == 1) {
             return RespBean.ok("添加成功!");
         }
         return RespBean.error("添加失败!");
     }
 
     @DeleteMapping("/{id}")
-    public RespBean deleteSalaryById(@PathVariable Integer uid) {
-        if (salaryService.deleteSalaryById(uid) == 1) {
+    public RespBean deleteSalaryById(@PathVariable Integer id) {
+        if (salaryService.deleteSalaryById(id) == 1) {
             return RespBean.ok("删除成功！");
         }
         return RespBean.error("删除失败！");
+    }
+
+    @DeleteMapping("/")
+    public RespBean deleteSalariesByIds(Integer[] ids) {
+        if (salaryService.deleteSalariesByIds(ids) == ids.length) {
+            return RespBean.ok("删除成功!");
+        }
+        return RespBean.error("删除失败!");
     }
 
     @PutMapping("/")

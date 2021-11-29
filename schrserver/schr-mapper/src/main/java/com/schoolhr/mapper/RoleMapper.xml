@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.schoolhr.mapper.RoleMapper">
-    <insert id="insert"></insert>
-    <insert id="insertSelective"></insert>
-    <update id="updateByPrimaryKeySelective"></update>
-    <update id="updateByPrimaryKey"></update>
-    <delete id="deleteByPrimaryKey"></delete>
+    <insert id="insert" parameterType="com.schoolhr.model.Role">
+        insert into role (id, name, nameZh
+        )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}
+               )
+    </insert>
+    <insert id="insertSelective" parameterType="com.schoolhr.model.Role">
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="nameZh != null" >
+                nameZh,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameZh != null" >
+                #{nameZh,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.Role">
+        update role
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameZh != null" >
+                nameZh = #{nameZh,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.Role">
+        update role
+        set name = #{name,jdbcType=VARCHAR},
+            nameZh = #{nameZh,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete from role
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Role"></select>
     <select id="getAllRoles" resultType="com.schoolhr.model.Role">
         select * from role;
