@@ -18,12 +18,11 @@
     </resultMap>
 
     <select id="deleteDepById" statementType="CALLABLE">
-        /*调用存储过程deleteDep*/
     call deleteDep(#{id ,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
     </select>
 
     <select id="addDep" statementType="CALLABLE">
-        call addDep(#{name,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},
+        call addDep(#{name,mode=IN,jdbcType=VARCHAR},#{address,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},
             #{enabled,mode=IN,jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},#{id,mode=OUT,jdbcType=INTEGER})
     </select>
 
@@ -39,5 +38,8 @@
         <include refid="Base_Column_List">
         </include>
         from department;
+    </select>
+    <select id="getAllDepartmentsWithNone" resultType="com.schoolhr.model.Department">
+        select * from department;
     </select>
 </mapper>

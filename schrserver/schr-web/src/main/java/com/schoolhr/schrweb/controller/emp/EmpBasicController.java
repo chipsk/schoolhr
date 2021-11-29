@@ -1,11 +1,7 @@
 package com.schoolhr.schrweb.controller.emp;
 
-import com.schoolhr.model.Employee;
-import com.schoolhr.model.RespBean;
-import com.schoolhr.model.RespPageBean;
-import com.schoolhr.sevice.DepartmentService;
-import com.schoolhr.sevice.EmployeeService;
-import com.schoolhr.sevice.PositionService;
+import com.schoolhr.model.*;
+import com.schoolhr.sevice.*;
 import com.schoolhr.utils.POIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +22,10 @@ public class EmpBasicController {
     PositionService positionService;
     @Autowired
     DepartmentService departmentService;
+    @Autowired
+    PoliticsstatusService politicsstatusService;
+    @Autowired
+    JobLevelService jobLevelService;
 
 
     @GetMapping("/")
@@ -57,11 +57,30 @@ public class EmpBasicController {
         return RespBean.error("更新失败!");
     }
 
+
+    @GetMapping("/politicsstatus")
+    public List<Politicsstatus> getAllPoliticsstatus() {
+        return politicsstatusService.getAllPoliticsstatus();
+    }
+
+    @GetMapping("/joblevels")
+    public List<JobLevel> getAllJobLevels() {
+        return jobLevelService.getAllJobLevels();
+    }
+
+    @GetMapping("/maxuserID")
+    public RespBean maxuserID() {
+        RespBean respBean = RespBean.build().setStatus(200)
+                .setObj(String.format("%08d", employeeService.maxuserID() + 1));
+        return respBean;
+    }
+
     @GetMapping("/export")
     public ResponseEntity<byte[]> exportData() {
         List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, null,null).getData();
         return POIUtils.employee2Excel(list);
     }
+
 
     @PostMapping("/import")
     public RespBean importData(MultipartFile file) throws IOException {

@@ -51,25 +51,25 @@ public class EmployeeService {
         double month = (Double.parseDouble(yearFormat.format(endContract)) - Double.parseDouble(yearFormat.format(beginContract))) * 12 + (Double.parseDouble(monthFormat.format(endContract)) - Double.parseDouble(monthFormat.format(beginContract)));
         employee.setContractTime(Double.parseDouble(decimalFormat.format(month / 12)));
         int result = employeeMapper.insertSelective(employee);
-        if (result == 1) {
-            Employee emp = employeeMapper.getEmployeeById(employee.getId());
-            //生成消息的唯一id
-            String msgId = UUID.randomUUID().toString();
-            MailSendLog mailSendLog = new MailSendLog();
-            mailSendLog.setMsgId(msgId);
-            mailSendLog.setCreateTime(new Date());
-            mailSendLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);
-            mailSendLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);
-            mailSendLog.setEmpId(emp.getId());
-            mailSendLog.setTryTime(new Date(System.currentTimeMillis() + 1000 * 60 * MailConstants.MSG_TIMEOUT));
-            mailSendLogService.insert(mailSendLog);
-            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, new CorrelationData(msgId));
-        }
+//        if (result == 1) {
+//            Employee emp = employeeMapper.getEmployeeById(employee.getId());
+//            //生成消息的唯一id
+//            String msgId = UUID.randomUUID().toString();
+//            MailSendLog mailSendLog = new MailSendLog();
+//            mailSendLog.setMsgId(msgId);
+//            mailSendLog.setCreateTime(new Date());
+//            mailSendLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);
+//            mailSendLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);
+//            mailSendLog.setEmpId(emp.getId());
+//            mailSendLog.setTryTime(new Date(System.currentTimeMillis() + 1000 * 60 * MailConstants.MSG_TIMEOUT));
+//            mailSendLogService.insert(mailSendLog);
+//            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, new CorrelationData(msgId));
+//        }
         return result;
     }
 
-    public Integer maxWorkID() {
-        return employeeMapper.maxWorkID();
+    public Integer maxuserID() {
+        return employeeMapper.maxuserID();
     }
 
     public Integer deleteEmpByEid(Integer id) {
@@ -102,4 +102,5 @@ public class EmployeeService {
     public Employee getEmployeeById(Integer empId) {
         return employeeMapper.getEmployeeById(empId);
     }
+
 }

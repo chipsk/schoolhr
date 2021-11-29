@@ -76,7 +76,7 @@
                 #{bonus,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
-                #{remark,jdbcType=VARCHAR}
+                #{remark,jdbcType=VARCHAR},
             </if>
             <if test="adate != null">
                 #{adate,jdbcType=DATE},
@@ -102,13 +102,13 @@
             allSalary = #{allSalary,jdbcType=VARCHAR},
         </if>
         <if test="remark != null">
-            remark = #{remark,jdbcType=VARCHAR}
+            remark = #{remark,jdbcType=VARCHAR},
         </if>
         <if test="remark != null">
-            remark = #{remark,jdbcType=VARCHAR}
+            remark = #{remark,jdbcType=VARCHAR},
         </if>
         <if test="adate != null">
-            adate = #{adate,jdbcType=DATE},
+            adate = #{adate,jdbcType=DATE}
         </if>
     </set>
         where id = #{id,jdbcType=INTEGER}
@@ -122,12 +122,18 @@
             allSalary = #{allSalary,jdbcType=VARCHAR},
             bonus = #{bonus,jdbcType=VARCHAR},
             adate = #{adate,jdbcType=DATE},
-            remark = #{remark,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <delete id="deleteByPrimaryKey">
         delete from salary
         where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteSalariesByIds">
+        delete from salary where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </delete>
 
     <select id="getAllSalaries" resultType="com.schoolhr.model.Salary">
@@ -140,6 +146,18 @@
         Select * from salary where username = #{username}
     </select>
     <select id="getdepartSalaries" resultType="com.schoolhr.model.Salary"></select>
+    <select id="getSalariesByPage" resultType="com.schoolhr.model.Salary">
+        Select * from salary where 1=1
+        <if test="sal.username !=null and sal.username!=''">
+            and username like concat('%',#{sal.username},'%')
+        </if>
+        <if test="sal.userID !=null">
+            and userID =#{sal.userID}
+        </if>
+        <if test="page !=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
 
 
 </mapper>
