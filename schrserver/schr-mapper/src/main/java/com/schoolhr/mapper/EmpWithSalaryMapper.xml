@@ -50,9 +50,9 @@
     <update id="updateByPrimaryKeySelective"></update>
     <update id="updateByPrimaryKey"></update>
     <delete id="deleteByPrimaryKey"></delete>
-    <select id="getAllSalaryAccounts" resultMap="SalaryAccountMap">
+    <select id="getAllSalaryAccounts" resultType="com.schoolhr.model.Employee">
         select e.`id`,e.userID,e.username,e.userSex,e.idCard,e.politic,e.phone,e.address,e.basisSalary,e.workstatus,e.e_mail,e.departmentid,e.joblevel,
-               e.contractTime,e.beginworkDate,e.endworkDate,e.birthday,e.positionid,sa.`name`
+               e.contractTime,e.beginworkDate,e.endworkDate,e.birthday,e.positionid,sa.`name` as accountName
         from employee e LEFT JOIN salaryaccount sa ON e.departmentid=sa.departmentid
         where 1=1
         <if test="emps.username !=null and emps.username!=''">
@@ -64,7 +64,6 @@
         <if test="page !=null and size!=null">
             limit #{page},#{size}
         </if>
-
     </select>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
 <!--    <select id="getTotal" resultType="java.lang.Long">-->
