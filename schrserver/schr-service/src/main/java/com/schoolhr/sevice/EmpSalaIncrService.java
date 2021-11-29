@@ -2,6 +2,7 @@ package com.schoolhr.sevice;
 
 import com.schoolhr.mapper.EmpInfoMapper;
 import com.schoolhr.model.Personnel.EmpInfo;
+import com.schoolhr.model.Personnel.EmpSalary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,19 @@ public class EmpSalaIncrService {
     @Autowired
     EmpInfoMapper empInfoMapper;
 
-    public List<EmpInfo> getAllsalary() {
+    public List<EmpSalary> getAllsalary() {
         return empInfoMapper.getAllsalary();
     }
 
-    public Integer updatesalary(EmpInfo empInfo){
-        return empInfoMapper.updatesalary(empInfo);
+    public Integer updateSalaryByid(EmpInfo empInfo){
+        return empInfoMapper.updateByPrimaryKeySelective(empInfo);
 
     }
+    public List<EmpInfo> getSalaryByid(Integer userID){
+        return empInfoMapper.getSalaryByid(userID);
+    }
+
+//    public int updateSalaryByid(EmpInfo empInfo) {
+//        return empInfoMapper.updatesalaryByid(empInfo);
+//    }
 }

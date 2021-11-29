@@ -91,7 +91,6 @@ public class Employee implements Serializable {
         return basisSalary;
     }
 
-
     public String getE_mail() {
         return E_mail;
     }
@@ -154,6 +153,10 @@ public class Employee implements Serializable {
 
     public void setE_mail(String e_mail) {
         E_mail = e_mail;
+    }
+
+    public void setDepartmentid(Integer departmentid) {
+        this.departmentid = departmentid;
     }
 
     public void setJoblevel(String joblevel) {

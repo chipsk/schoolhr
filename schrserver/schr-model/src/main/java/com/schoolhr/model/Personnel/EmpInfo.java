@@ -9,13 +9,13 @@ public class EmpInfo {
     private Integer userID;
     private String username;
     private String userSex;
-    private String IDcard;
+    private String idCard;
     private String politic;
     private String phone;
     private String address;
     private Integer basisSalary;
     private String workstatus;
-    private String E_mail;
+    private String e_mail;
     private int departmentid;
     private String joblevel;
     private Integer contractTime;
@@ -59,8 +59,8 @@ public class EmpInfo {
         return userSex;
     }
 
-    public String getIDcard() {
-        return IDcard;
+    public String getidCard() {
+        return idCard;
     }
 
     public String getPolitic() {
@@ -88,8 +88,8 @@ public class EmpInfo {
         return endworkDate;
     }
 
-    public String getE_mail() {
-        return E_mail;
+    public String gete_mail() {
+        return e_mail;
     }
 
     public int getDepartmentid() {
@@ -122,8 +122,8 @@ public class EmpInfo {
         this.userSex = userSex;
     }
 
-    public void setIDcard(String IDcard) {
-        this.IDcard = IDcard;
+    public void setidCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public void setPolitic(String politic) {
@@ -147,7 +147,7 @@ public class EmpInfo {
     }
 
     public void setE_mail(String e_mail) {
-        E_mail = e_mail;
+        this.e_mail = e_mail;
     }
 
     public void setJoblevel(String joblevel) {
@@ -177,13 +177,13 @@ public class EmpInfo {
                 ", userID=" + userID +
                 ", username='" + username + '\'' +
                 ", userSex='" + userSex + '\'' +
-                ", IDcard='" + IDcard + '\'' +
+                ", idCard='" + idCard + '\'' +
                 ", politic='" + politic + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", basisSalary=" + basisSalary +
                 ", workstatus='" + workstatus + '\'' +
-                ", E_mail='" + E_mail + '\'' +
+                ", e_mail='" + e_mail + '\'' +
                 ", departmentid=" + departmentid +
                 ", joblevel='" + joblevel + '\'' +
                 ", contractTime=" + contractTime +
@@ -193,5 +193,6 @@ public class EmpInfo {
                 ", positionid=" + positionid +
                 '}';
     }
+
 }
 

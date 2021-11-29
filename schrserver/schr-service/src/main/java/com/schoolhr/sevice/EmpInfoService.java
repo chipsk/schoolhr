@@ -1,7 +1,10 @@
 package com.schoolhr.sevice;
 
 import com.schoolhr.mapper.EmpInfoMapper;
+import com.schoolhr.model.Personnel.AllEmpDepartment;
 import com.schoolhr.model.Personnel.EmpInfo;
+import com.schoolhr.model.Personnel.EmpMove;
+import com.schoolhr.model.Personnel.EmpWorkstatus;
 import com.schoolhr.model.RespPageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +28,11 @@ public class EmpInfoService {
     public List<EmpInfo> getAllEmployee(){
         return empInfoMapper.getAllEmployee();
     }
-    public List<EmpInfo> getAllDepartments() {
+
+    public List<AllEmpDepartment> getAllDepartments() {
         return empInfoMapper.getAllDepartments();
     }
+
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size, EmpInfo empInfo) {
         if (page != null && size != null) {
@@ -42,17 +47,16 @@ public class EmpInfoService {
     }
 
     public Integer addEmp(EmpInfo empInfo) {
-        int result = empInfoMapper.insertSelective(empInfo);
-        return result;
+        return empInfoMapper.insertAll(empInfo);
     }
 
     public Integer deleteEmpByEid(Integer id) {
         return empInfoMapper.deleteEmpByEid(id);
     }
 
-    public Integer updateEmp(EmpInfo employee) {
-        return empInfoMapper.updateByPrimaryKeySelective(employee);
-    }
+//    public Integer updateEmp(EmpInfo employee) {
+//        return empInfoMapper.updateByPrimaryKeySelective(employee);
+//    }
 
     public Integer addEmps(List<EmpInfo> list) {
         return empInfoMapper.addEmps(list);
@@ -77,8 +81,8 @@ public class EmpInfoService {
         return empInfoMapper.updateEmployeeSalaryById(eid, sid);
     }
 
-    public EmpInfo getEmployeeById(Integer empId) {
-        return empInfoMapper.getEmployeeById(empId);
+    public List<EmpInfo> getEmployeeById(Integer id) {
+        return empInfoMapper.getEmployeeById(id);
     }
 
     public List<EmpInfo> getSalaryByid(Integer id) {
@@ -95,5 +99,15 @@ public class EmpInfoService {
 
     public Integer updateJoblevel(EmpInfo empInfo) {
         return empInfoMapper.updateJoblevel(empInfo);
+    }
+
+
+
+    public List<EmpWorkstatus> getAllStatus() {
+        return empInfoMapper.getAllStatus();
+    }
+
+    public int upempinfo(EmpInfo empInfo) {
+        return empInfoMapper.upempinfo(empInfo);
     }
 }
