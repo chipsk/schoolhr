@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.SalaryAccountMapper">
+    <resultMap id="BaseResultMap" type="com.schoolhr.model.SalaryAccount">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER"/>
+        <result column="bonus" property="bonus" jdbcType="VARCHAR"/>
+        <result column="lunchSalary" property="lunchSalary" jdbcType="INTEGER"/>
+        <result column="trafficSalary" property="trafficSalary" jdbcType="INTEGER"/>
+        <result column="allSalary" property="allSalary" jdbcType="VARCHAR"/>
+        <result column="socialBase" property="socialBase" jdbcType="INTEGER"/>
+        <result column="socialPer" property="socialPer" jdbcType="REAL"/>
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="medicalBase" property="medicalBase" jdbcType="INTEGER"/>
+        <result column="medicalPer" property="medicalPer" jdbcType="REAL"/>
+        <result column="accumulationFundBase" property="accumulationFundBase" jdbcType="INTEGER"/>
+        <result column="accumulationFundPer" property="accumulationFundPer" jdbcType="REAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socialPer,createDate, medicalBase, medicalPer, accumulationFundBase, accumulationFundPer, name,departmentid
+    </sql>
+    <select id="getAllSalaryAccounts" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from salaryaccount
+    </select>
+    <insert id="insertSelective" parameterType="com.schoolhr.model.SalaryAccount">
+        insert into salaryaccount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="basisSalary != null">
+                basisSalary,
+            </if>
+            <if test="bonus != null">
+                bonus,
+            </if>
+            <if test="lunchSalary != null">
+                lunchSalary,
+            </if>
+            <if test="trafficSalary != null">
+                trafficSalary,
+            </if>
+            <if test="allSalary != null">
+                allSalary,
+            </if>
+            <if test="socialBase != null">
+                socialBase,
+            </if>
+            <if test="socialPer != null">
+                socialPer,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="medicalBase != null">
+                medicalBase,
+            </if>
+            <if test="medicalPer != null">
+                medicalPer,
+            </if>
+            <if test="accumulationFundBase != null">
+                accumulationFundBase,
+            </if>
+            <if test="accumulationFundPer != null">
+                accumulationFundPer,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="departmentid != null">
+                departmentid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="basisSalary != null">
+                #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="bonus != null">
+                #{bonus,jdbcType=VARCHAR},
+            </if>
+            <if test="lunchSalary != null">
+                #{lunchSalary,jdbcType=INTEGER},
+            </if>
+            <if test="trafficSalary != null">
+                #{trafficSalary,jdbcType=INTEGER},
+            </if>
+            <if test="allSalary != null">
+                #{allSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="socialBase != null">
+                #{socialBase,jdbcType=INTEGER},
+            </if>
+            <if test="socialPer != null">
+                #{socialPer,jdbcType=REAL},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="medicalBase != null">
+                #{medicalBase,jdbcType=INTEGER},
+            </if>
+            <if test="medicalPer != null">
+                #{medicalPer,jdbcType=REAL},
+            </if>
+            <if test="accumulationFundBase != null">
+                #{accumulationFundBase,jdbcType=INTEGER},
+            </if>
+            <if test="accumulationFundPer != null">
+                #{accumulationFundPer,jdbcType=REAL},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                #{departmentid,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <insert id="insert" parameterType="com.schoolhr.model.SalaryAccount">
+        insert into salary (id,basisSalary, bonus,
+                            lunchSalary, trafficSalary, allSalary,
+                            socialBase, socialPer, createDate,
+                            medicalBase, medicalPer, accumulationFundBase,
+                            accumulationFundPer, name,departmentid)
+        values (#{id,jdbcType=INTEGER}, #{basisSalary,jdbcType=INTEGER}, #{bonus,jdbcType=VARCHAR},
+                #{lunchSalary,jdbcType=INTEGER}, #{trafficSalary,jdbcType=INTEGER}, #{allSalary,jdbcType=VARCHAR},
+                #{socialBase,jdbcType=INTEGER}, #{socialPer,jdbcType=REAL}, #{createDate,jdbcType=TIMESTAMP},
+                #{medicalBase,jdbcType=INTEGER}, #{medicalPer,jdbcType=REAL}, #{accumulationFundBase,jdbcType=INTEGER},
+                #{accumulationFundPer,jdbcType=REAL}, #{name,jdbcType=VARCHAR},#{departmentid,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.SalaryAccount">
+        update salaryaccount
+        set basisSalary = #{basisSalary,jdbcType=INTEGER},
+            bonus = #{bonus,jdbcType=VARCHAR},
+            lunchSalary = #{lunchSalary,jdbcType=INTEGER},
+            trafficSalary = #{trafficSalary,jdbcType=INTEGER},
+            allSalary = #{allSalary,jdbcType=VARCHAR},
+            socialBase = #{socialBase,jdbcType=INTEGER},
+            socialPer = #{socialPer,jdbcType=REAL},
+            createDate = #{createDate,jdbcType=TIMESTAMP},
+            medicalBase = #{medicalBase,jdbcType=INTEGER},
+            medicalPer = #{medicalPer,jdbcType=REAL},
+            accumulationFundBase = #{accumulationFundBase,jdbcType=INTEGER},
+            accumulationFundPer = #{accumulationFundPer,jdbcType=REAL},
+            name = #{name,jdbcType=VARCHAR},departmentid = #{departmentid,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.SalaryAccount">
+        update salaryaccount
+        <set>
+            <if test="basisSalary != null">
+                basisSalary = #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="bonus != null">
+                bonus = #{bonus,jdbcType=VARCHAR},
+            </if>
+            <if test="lunchSalary != null">
+                lunchSalary = #{lunchSalary,jdbcType=INTEGER},
+            </if>
+            <if test="trafficSalary != null">
+                trafficSalary = #{trafficSalary,jdbcType=INTEGER},
+            </if>
+            <if test="allSalary != null">
+                allSalary = #{allSalary,jdbcType=VARCHAR},
+            </if>
+            <if test="socialBase != null">
+                socialBase = #{socialBase,jdbcType=INTEGER},
+            </if>
+            <if test="socialPer != null">
+                socialPer = #{socialPer,jdbcType=REAL},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="medicalBase != null">
+                medicalBase = #{medicalBase,jdbcType=INTEGER},
+            </if>
+            <if test="medicalPer != null">
+                medicalPer = #{medicalPer,jdbcType=REAL},
+            </if>
+            <if test="accumulationFundBase != null">
+                accumulationFundBase = #{accumulationFundBase,jdbcType=INTEGER},
+            </if>
+            <if test="accumulationFundPer != null">
+                accumulationFundPer = #{accumulationFundPer,jdbcType=REAL},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from salaryaccount
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" resultType="com.schoolhr.model.SalaryAccount">
+        select
+        <include refid="Base_Column_List"/>
+        from salaryaccount
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>
