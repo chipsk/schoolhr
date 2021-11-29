@@ -10,23 +10,23 @@ import java.util.List;
 
 @Service
 public class EmpWithSalaryService {
-    @Autowired
-    EmpWithSalaryMapper empWithSalaryMapper;
-
-    public List<SalaryAccount> getAllSalaryAccounts() {
-        return empWithSalaryMapper.getAllSalaryAccounts();
-    }
-
-    public Integer addSalary(SalaryAccount salaryAccount) {
-        salaryAccount.setCreateDate(new Date());
-        return empWithSalaryMapper.insertSelective(salaryAccount);
-    }
-
-    public Integer deleteSalaryById(Integer id) {
-        return empWithSalaryMapper.deleteByPrimaryKey(id);
-    }
-
-    public Integer updateSalaryById(SalaryAccount salaryAccount) {
-        return empWithSalaryMapper.updateByPrimaryKeySelective(salaryAccount);
-    }
+//    @Autowired
+//    EmpWithSalaryMapper empWithSalaryMapper;
+//
+//    public List<SalaryAccount> getAllSalaryAccounts() {
+//        return empWithSalaryMapper.getAllSalaryAccounts();
+//    }
+//
+//    public Integer addSalary(SalaryAccount salaryAccount) {
+//        salaryAccount.setCreateDate(new Date());
+//        return empWithSalaryMapper.insertSelective(salaryAccount);
+//    }
+//
+//    public Integer deleteSalaryById(Integer id) {
+//        return empWithSalaryMapper.deleteByPrimaryKey(id);
+//    }
+//
+//    public Integer updateSalaryById(SalaryAccount salaryAccount) {
+//        return empWithSalaryMapper.updateByPrimaryKeySelective(salaryAccount);
+//    }
 }
