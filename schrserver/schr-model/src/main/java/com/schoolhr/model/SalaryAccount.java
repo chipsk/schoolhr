@@ -31,6 +31,16 @@ public class SalaryAccount {
 
     private String name;
 
+    private int departmentid;
+
+    public int getDepartmentid() {
+        return departmentid;
+    }
+
+    public void setDepartmentid(int departmentid) {
+        this.departmentid = departmentid;
+    }
+
     public Integer getId() {
         return id;
     }

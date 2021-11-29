@@ -16,9 +16,10 @@
         <result column="accumulationFundBase" property="accumulationFundBase" jdbcType="INTEGER"/>
         <result column="accumulationFundPer" property="accumulationFundPer" jdbcType="REAL"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socialPer,createDate, medicalBase, medicalPer, accumulationFundBase, accumulationFundPer, name
+id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socialPer,createDate, medicalBase, medicalPer, accumulationFundBase, accumulationFundPer, name,departmentid
     </sql>
     <select id="getAllSalaryAccounts" resultMap="BaseResultMap">
         select
@@ -70,6 +71,9 @@ id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socia
             <if test="name != null">
                 name,
             </if>
+            <if test="departmentid != null">
+                departmentid,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -114,6 +118,9 @@ id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socia
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
+            <if test="departmentid != null">
+                #{departmentid,jdbcType=INTEGER}
+            </if>
         </trim>
     </insert>
     <insert id="insert" parameterType="com.schoolhr.model.SalaryAccount">
@@ -121,12 +128,12 @@ id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socia
                             lunchSalary, trafficSalary, allSalary,
                             socialBase, socialPer, createDate,
                             medicalBase, medicalPer, accumulationFundBase,
-                            accumulationFundPer, name)
+                            accumulationFundPer, name,departmentid)
         values (#{id,jdbcType=INTEGER}, #{basisSalary,jdbcType=INTEGER}, #{bonus,jdbcType=VARCHAR},
                 #{lunchSalary,jdbcType=INTEGER}, #{trafficSalary,jdbcType=INTEGER}, #{allSalary,jdbcType=VARCHAR},
                 #{socialBase,jdbcType=INTEGER}, #{socialPer,jdbcType=REAL}, #{createDate,jdbcType=TIMESTAMP},
                 #{medicalBase,jdbcType=INTEGER}, #{medicalPer,jdbcType=REAL}, #{accumulationFundBase,jdbcType=INTEGER},
-                #{accumulationFundPer,jdbcType=REAL}, #{name,jdbcType=VARCHAR})
+                #{accumulationFundPer,jdbcType=REAL}, #{name,jdbcType=VARCHAR},#{departmentid,jdbcType=INTEGER})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.SalaryAccount">
         update salaryaccount
@@ -142,7 +149,7 @@ id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socia
             medicalPer = #{medicalPer,jdbcType=REAL},
             accumulationFundBase = #{accumulationFundBase,jdbcType=INTEGER},
             accumulationFundPer = #{accumulationFundPer,jdbcType=REAL},
-            name = #{name,jdbcType=VARCHAR}
+            name = #{name,jdbcType=VARCHAR},departmentid = #{departmentid,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.SalaryAccount">
@@ -186,6 +193,9 @@ id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socia
             </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER}
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
