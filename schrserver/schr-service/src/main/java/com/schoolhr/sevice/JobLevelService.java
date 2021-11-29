@@ -20,11 +20,11 @@ public class JobLevelService {
     public Integer addJobLevel(JobLevel jobLevel) {
         jobLevel.setCreateDate(new Date());
         jobLevel.setEnabled(true);
-        return jobLevelMapper.insertSelective(jobLevel);
+        return jobLevelMapper.insert(jobLevel);
     }
 
-    public Integer updateJobLevel(JobLevel jobLevel) {
-        return jobLevelMapper.updateByPrimaryKeySelective(jobLevel);
+    public Integer updateJobLevel(Integer id) {
+        return jobLevelMapper.updateByPrimaryKey(id);
     }
 
     public Integer deleteJobLevelById(Integer id) {

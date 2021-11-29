@@ -24,9 +24,9 @@ public class JobLevelController {
         }
         return RespBean.error("添加失败");
     }
-    @PutMapping("/")
-    public RespBean updatePosition(@RequestBody JobLevel jobLevel){
-        if (jobLevelService.updateJobLevel(jobLevel)==1){
+    @PutMapping("/{id}")
+    public RespBean updatePosition(@PathVariable Integer id){
+        if (jobLevelService.updateJobLevel(id)==1){
             return RespBean.ok("更新成功");
         }
         return RespBean.error("更新失败");

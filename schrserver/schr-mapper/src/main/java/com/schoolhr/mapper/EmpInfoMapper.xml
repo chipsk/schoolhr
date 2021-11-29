@@ -1,28 +1,309 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.schoolhr.mapper.EmpInfoMapper">
+    <resultMap id="resultbase" type="com.schoolhr.model.Personnel.EmpInfo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userID" property="userID" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="userSex" property="userSex" jdbcType="CHAR" />
+        <result column="idCard" property="idCard" jdbcType="VARCHAR" />
+        <result column="politic" property="politic" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
+        <result column="workstatus" property="workstatus" jdbcType="VARCHAR" />
+        <result column="e_mail" property="e_mail" jdbcType="VARCHAR" />
+        <result column="departmentid" property="departmentid" jdbcType="INTEGER" />
+        <result column="joblevel" property="joblevel" jdbcType="VARCHAR" />
+        <result column="contractTime" property="contractTime" jdbcType="DOUBLE" />
+        <result column="beginworkDate" property="beginworkDate" jdbcType="DATE" />
+        <result column="endworkDate" property="endworkDate" jdbcType="DATE" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="positionid" property="positionid" jdbcType="INTEGER" />
+    </resultMap>
 
+    <resultMap id="EmpStatus" type="com.schoolhr.model.Personnel.EmpMove">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userID" property="userID" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="departmentname" property="departmentname" jdbcType="VARCHAR" />
+        <result column="departmentid" property="departmentid" jdbcType="INTEGER" />
+        <result column="joblevel" property="joblevel" jdbcType="VARCHAR" />
+        <result column="positionname" property="positionname" jdbcType="VARCHAR" />
+        <result column="positionid" property="positionid" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="Empsalary" type="com.schoolhr.model.Personnel.EmpSalary">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="userID" property="userID" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
+    </resultMap>
 
-    <insert id="insert"></insert>
+    <insert id="insertAll">
+        insert into employee (id, userID, username,
+                userSex, idCard, politic, phone,
+                address, basisSalary, workstatus,
+                e_mail, departmentid, joblevel,
+                contractTime, beginworkDate, endworkDate,
+                birthday, positionid
+        )
+        values (#{id,jdbcType=INTEGER}, #{userID,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+                #{userSex,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, #{politic,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR}, #{basisSalary,jdbcType=INTEGER}, #{workstatus,jdbcType=VARCHAR},
+                #{e_mail,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, #{joblevel,jdbcType=VARCHAR},
+                #{contractTime,jdbcType=DOUBLE}, #{beginworkDate,jdbcType=DATE}, #{endworkDate,jdbcType=DATE},
+                #{birthday,jdbcType=DATE}, #{positionid,jdbcType=INTEGER}
+               )
+    </insert>
     <insert id="insertSelective">
+
 --         insert into employee where
     </insert>
     <insert id="addEmps"></insert>
-    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKeySelective">
+    UPDATE employee
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                userSex = #{userSex,jdbcType=CHAR},
+            </if>
+            <if test="idCard != null">
+                IDcard = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="politic != null">
+                politic = #{politic,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="basisSalary != null">
+                basisSalary = #{basisSalary,jdbcType=INTEGER},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="e_mail != null">
+                E_mail = #{e_mail,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="contractTime != null">
+                contractTime = #{contractTime,jdbcType=DOUBLE},
+            </if>
+            <if test="beginworkDate != null">
+                beginworkDate = #{beginworkDate,jdbcType=DATE},
+            </if>
+            <if test="endworkDate != null">
+                endworkDate = #{endworkDate,jdbcType=DATE},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
     <update id="updateByPrimaryKey"></update>
     <update id="updateEmployeeSalaryById"></update>
     <update id="maxWorkID"></update>
-    <update id="updatesalary">
-    UPDATE employee SET basisSalary=#{basisSalary} WHERE userID=#{userID}
+
+    <update id="updatesalaryByid" parameterType="com.schoolhr.model.Personnel.EmpInfo">
+        update employee set basisSalary=#{basisSalary} where userID=#{userId}
     </update>
+
     <update id="updateWorkStatus">
         update employee set workstatus=#{workstatus} where userID=#{userID}
     </update>
     <update id="updateJoblevel">
         update employee set joblevel=#{joblevel} where userID=#{userID}
     </update>
+
+    <update id="upDepartment">
+        UPDATE empmove
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentname != null">
+                departmentname = #{departmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="positionname != null">
+                positionname = #{positionname,jdbcType=VARCHAR},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
+
+    <update id="upworkstat">
+        UPDATE empmove
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentname != null">
+                departmentname = #{departmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="positionname != null">
+                positionname = #{positionname,jdbcType=VARCHAR},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
+    <update id="upjoblevel">
+        UPDATE empmove
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentname != null">
+                departmentname = #{departmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="positionname != null">
+                positionname = #{positionname,jdbcType=VARCHAR},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
+    <update id="upposition">
+        UPDATE empmove
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentname != null">
+                departmentname = #{departmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="positionname != null">
+                positionname = #{positionname,jdbcType=VARCHAR},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
+    <update id="upempinfo">
+        UPDATE empmove
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userID != null">
+                userID = #{userID,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="workstatus != null">
+                workstatus = #{workstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentname != null">
+                departmentname = #{departmentname,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid,jdbcType=INTEGER},
+            </if>
+            <if test="joblevel != null">
+                joblevel = #{joblevel,jdbcType=VARCHAR},
+            </if>
+            <if test="positionname != null">
+                positionname = #{positionname,jdbcType=VARCHAR},
+            </if>
+            <if test="positionid != null">
+                positionid = #{positionid,jdbcType=INTEGER}
+            </if>
+        </set>
+        where userID=#{userID,jdbcType=VARCHAR}
+    </update>
+
     <delete id="deleteEmpByEid">
-        delete from employee where userID=#{id}
+        delete from employee where id=#{id}
     </delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
     <select id="getEmployeeByPage" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
@@ -30,22 +311,36 @@
 --         select * from employee_info;
     </select>
     <select id="getEmployeeById" resultType="com.schoolhr.model.Personnel.EmpInfo">
-        select * from employee where departmentid=#{id,jdbcType=INTEGER}
+        select * from employee where userID=#{id,jdbcType=VARCHAR}
+<!--        <if test="userID != null">-->
+<!--            userID = #{userID,jdbcType=VARCHAR},-->
+<!--        </if>-->
     </select>
     <select id="getEmployeeByPageWithSalary" resultType="com.schoolhr.model.Personnel.EmpInfo"></select>
     <select id="getAllEmployee" resultType="com.schoolhr.model.Personnel.EmpInfo">
         Select * from employee
     </select>
     <select id="getSalaryByid" resultType="com.schoolhr.model.Personnel.EmpInfo">
-        select userID,username,basisSalary from employee where userID=#{id}
+        select userID,username,basisSalary from employee where userID=#{userID,jdbcType=VARCHAR}
     </select>
-    <select id="getAllDepartments" resultType="com.schoolhr.model.Personnel.EmpInfo">
-        select userID,username ,departmentid from employee_info
+
+    <select id="getAllDepartments" resultType="com.schoolhr.model.Personnel.AllEmpDepartment">
+        select * from employee
     </select>
-    <select id="getAllsalary" resultType="com.schoolhr.model.Personnel.EmpInfo">
-        select userID,username,basisSalary from employee_info
+
+    <select id="getAllsalary" resultType="com.schoolhr.model.Personnel.EmpSalary">
+        select * from employee
     </select>
     <select id="getEmDep" resultType="com.schoolhr.model.Personnel.EmpInfo">
         select userID,username,workstatus,departmentid,joblevel from employee
+    </select>
+    <select id="getAllStatus" resultType="com.schoolhr.model.Personnel.EmpWorkstatus">
+        select * from employee
+    </select>
+    <select id="getEmpStatus" resultType="com.schoolhr.model.Personnel.EmpMove">
+        select * from empmove
+    </select>
+    <select id="getEmpStatusByid" resultType="com.schoolhr.model.Personnel.EmpMove">
+        select * from empmove where userID=#{userID}
     </select>
 </mapper>

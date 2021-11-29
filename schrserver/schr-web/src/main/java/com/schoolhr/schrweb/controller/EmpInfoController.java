@@ -1,6 +1,9 @@
 package com.schoolhr.schrweb.controller;
 
+import com.schoolhr.model.Personnel.AllEmpDepartment;
 import com.schoolhr.model.Personnel.EmpInfo;
+import com.schoolhr.model.Personnel.EmpMove;
+import com.schoolhr.model.Personnel.EmpWorkstatus;
 import com.schoolhr.model.RespBean;
 import com.schoolhr.sevice.EmpInfoService;
 import com.schoolhr.sevice.PositionService;
@@ -19,28 +22,17 @@ public class EmpInfoController {
     @Autowired
     PositionService positionService;
 
-    @GetMapping("/")
+    @GetMapping("/")  //ok
     public List<EmpInfo> getAllEmployee(){
         return empInfoService.getAllEmployee();
     }
-    @GetMapping("/{id}")
-    public List<EmpInfo> getSalaryByUserid( @PathVariable Integer id){
-        return empInfoService.getSalaryByid(id);
-    }
-//    @GetMapping("/")
-//    public RespBean List<Employee> EmpInfoController(){
-//        return empInfoService.getAllEmployee();
-//    }
-//    @GetMapping("/1")
-//    public RespPageBean getEmployeeByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, EmpInfo empInfo) {
-//        return empInfoService.getEmployeeByPage(page, size, empInfo);
-//    }
-//    @GetMapping("/{id}")
-//    public List<EmpInfo> getEmployeeById(Integer pid){
-//        return (List<EmpInfo>) empInfoService.getEmployeeById(pid);
-//    }
 
-    @PostMapping("/")
+    @GetMapping("/{id}")  //ok
+    public List<EmpInfo> getEmployeeById(@PathVariable Integer id){
+        return empInfoService.getEmployeeById(id);
+    }
+
+    @PostMapping("/")  //ok
     public RespBean addEmp(@RequestBody EmpInfo employee) {
         if (empInfoService.addEmp(employee) == 1) {
             return RespBean.ok("添加成功!");
@@ -48,33 +40,38 @@ public class EmpInfoController {
         return RespBean.error("添加失败!");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") //ok
     public RespBean deleteEmpByEid(@PathVariable Integer id) {
         if (empInfoService.deleteEmpByEid(id) == 1) {
             return RespBean.ok("删除成功!");
         }
         return RespBean.error("删除失败!");
     }
-
-    @PutMapping("/")
-    public RespBean updateEmp(@RequestBody EmpInfo employee) {
-        if (empInfoService.updateEmp(employee) == 1) {
+    @PutMapping("/empinfo")  //ok
+    public RespBean upEmpInfo(@RequestBody EmpInfo empInfo){
+        if (empInfoService.upempinfo(empInfo) == 1) {
             return RespBean.ok("更新成功!");
         }
         return RespBean.error("更新失败!");
     }
 
-    @GetMapping("/maxWorkID")
-    public RespBean maxWorkID() {
-        RespBean respBean = RespBean.build().setStatus(200)
-                .setObj(String.format("%08d", empInfoService.maxWorkID() + 1));
-        return respBean;
+//    @GetMapping("/deps")  //ok
+//    public List<AllEmpDepartment> getAllDepartments() {
+//        return empInfoService.getAllDepartments();
+//    }
+
+    @GetMapping("/status")  //ok
+    public List<EmpWorkstatus> getAllStatus() {
+        return empInfoService.getAllStatus();
     }
 
-    @GetMapping("/deps")
-    public List<EmpInfo> getAllDepartments() {
-        return empInfoService.getAllDepartments();
-    }
+//    @PutMapping("/")
+//    public RespBean updateEmp(@RequestBody EmpInfo employee) {
+//        if (empInfoService.updateEmp(employee) == 1) {
+//            return RespBean.ok("更新成功!");
+//        }
+//        return RespBean.error("更新失败!");
+//    }
 
 //    @GetMapping("/export")
 //    public ResponseEntity<byte[]> exportData() {

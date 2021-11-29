@@ -122,12 +122,18 @@
             allSalary = #{allSalary,jdbcType=VARCHAR},
             bonus = #{bonus,jdbcType=VARCHAR},
             adate = #{adate,jdbcType=DATE},
-            remark = #{remark,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <delete id="deleteByPrimaryKey">
         delete from salary
         where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteSalariesByIds">
+        delete from salary where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </delete>
 
     <select id="getAllSalaries" resultType="com.schoolhr.model.Salary">

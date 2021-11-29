@@ -46,6 +46,10 @@ public class SalaryService {
             return salaryMapper.deleteByPrimaryKey(id);
         }
 
+        public Integer deleteSalariesByIds(Integer[] ids) {
+            return salaryMapper.deleteSalariesByIds(ids);
+        }
+
         public Integer updateSalaryById(Salary salary) {
             return salaryMapper.updateByPrimaryKeySelective(salary);
         }

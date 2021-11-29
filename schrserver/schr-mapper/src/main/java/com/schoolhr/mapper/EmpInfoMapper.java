@@ -1,21 +1,21 @@
 package com.schoolhr.mapper;
 
-import com.schoolhr.model.Personnel.EmpInfo;
+import com.schoolhr.model.Personnel.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
 
 public interface EmpInfoMapper {
-    List<EmpInfo> getSalaryByid(Integer id);
+    List<EmpInfo> getSalaryByid(@Param("userID") Integer userID);
 
     List<EmpInfo> getAllEmployee() ;
 
 
-    int deleteEmpByEid(Integer id);
+    int deleteEmpByEid(@Param("id")Integer id);
 
 
-    int insert(EmpInfo record);
+    int insertAll(EmpInfo record);
 
     int insertSelective(EmpInfo record);
 
@@ -33,22 +33,38 @@ public interface EmpInfoMapper {
 
     Integer addEmps(@Param("list") List<EmpInfo> list);
 
-    EmpInfo getEmployeeById(Integer id);
+    List<EmpInfo> getEmployeeById(Integer id);
 
     List<EmpInfo> getEmployeeByPageWithSalary(@Param("page") Integer page, @Param("size") Integer size);
 
     Integer updateEmployeeSalaryById(@Param("eid") Integer eid, @Param("sid") Integer sid);
 
-    List<EmpInfo> getAllDepartments();
+    List<AllEmpDepartment> getAllDepartments();
 
-    List<EmpInfo> getAllsalary();
+    List<EmpSalary> getAllsalary();
 
-    int updatesalary(EmpInfo record);
+    int updatesalaryByid(EmpInfo record);
 
     List<EmpInfo> getEmDep();
 
     int updateWorkStatus(EmpInfo record);
 
     int updateJoblevel(EmpInfo record);
+
+    int upDepartment(EmpMove record);
+
+    List<EmpWorkstatus> getAllStatus();
+
+    List<EmpMove> getEmpStatus();
+
+    int upworkstat(EmpMove record);
+
+    int upjoblevel(EmpMove record);
+
+    int upposition(EmpMove record);
+
+    List<EmpMove> getEmpStatusByid(Integer userID);
+
+    int upempinfo(EmpInfo empInfo);
 }
 
