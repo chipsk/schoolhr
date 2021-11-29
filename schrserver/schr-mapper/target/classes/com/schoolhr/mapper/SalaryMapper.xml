@@ -76,7 +76,7 @@
                 #{bonus,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
-                #{remark,jdbcType=VARCHAR}
+                #{remark,jdbcType=VARCHAR},
             </if>
             <if test="adate != null">
                 #{adate,jdbcType=DATE},

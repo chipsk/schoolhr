@@ -1,4 +1,4 @@
-package com.schoolhr.schrweb.controller;
+package com.schoolhr.schrweb.per;
 
 import com.schoolhr.model.Personnel.EmpInfo;
 import com.schoolhr.model.Personnel.EmpSalary;

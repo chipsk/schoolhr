@@ -1,4 +1,4 @@
-package com.schoolhr.schrweb.controller;
+package com.schoolhr.schrweb.per;
 
 import com.schoolhr.mapper.EmpInfoMapper;
 import com.schoolhr.model.Personnel.AllEmpDepartment;
