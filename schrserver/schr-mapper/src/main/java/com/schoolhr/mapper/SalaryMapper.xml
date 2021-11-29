@@ -79,7 +79,7 @@
                 #{remark,jdbcType=VARCHAR},
             </if>
             <if test="adate != null">
-                #{adate,jdbcType=DATE},
+                #{adate,jdbcType=DATE}
             </if>
         </trim>
     </insert>
