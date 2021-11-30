@@ -49,7 +49,9 @@
     <insert id="insertSelective"></insert>
     <update id="updateByPrimaryKeySelective"></update>
     <update id="updateByPrimaryKey"></update>
-    <delete id="deleteByPrimaryKey"></delete>
+    <delete id="deleteByPrimaryKey">
+
+    </delete>
     <select id="getAllSalaryAccounts" resultType="com.schoolhr.model.Employee">
         select e.`id`,e.userID,e.username,e.userSex,e.idCard,e.politic,e.phone,e.address,e.basisSalary,e.workstatus,e.e_mail,e.departmentid,e.joblevel,
                e.contractTime,e.beginworkDate,e.endworkDate,e.birthday,e.positionid,sa.`name` as accountName
@@ -66,34 +68,6 @@
         </if>
     </select>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
-<!--    <select id="getTotal" resultType="java.lang.Long">-->
-<!--        select count(*) from employee e-->
-<!--        <where>-->
-<!--            <if test="emp!=null">-->
-<!--                <if test="emp.name !=null and emp.name!=''">-->
-<!--                    and e.username like concat('%',#{emp.username},'%')-->
-<!--                </if>-->
-<!--                <if test="emp.politicId !=null">-->
-<!--                    and e.userID =#{emp.userID}-->
-<!--                </if>-->
-<!--                <if test="emp.nationId !=null">-->
-<!--                    and e.idCard =#{emp.idCard}-->
-<!--                </if>-->
-<!--                <if test="emp.jobLevelId !=null">-->
-<!--                    and e.phone =#{emp.phone}-->
-<!--                </if>-->
-<!--                <if test="emp.departmentId !=null">-->
-<!--                    and e.e_mail =#{emp.e_mail}-->
-<!--                </if>-->
-<!--                <if test="emp.engageForm !=null and emp.engageForm!=''">-->
-<!--                    and e.basisSalary =#{emp.basisSalary}-->
-<!--                </if>-->
 
-<!--            </if>-->
-<!--            <if test="beginDateScope !=null">-->
-<!--                and e.beginDate between #{beginDateScope[0]} and #{beginDateScope[1]}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
 
 </mapper>

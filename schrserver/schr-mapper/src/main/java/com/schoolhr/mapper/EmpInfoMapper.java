@@ -1,9 +1,9 @@
 package com.schoolhr.mapper;
 
+import com.schoolhr.model.EmpWithSalary;
 import com.schoolhr.model.Personnel.*;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface EmpInfoMapper {
@@ -41,7 +41,7 @@ public interface EmpInfoMapper {
 
     List<AllEmpDepartment> getAllDepartments();
 
-    List<EmpSalary> getAllsalary();
+    List<EmpWithSalary> getAllsalary();
 
     int updatesalaryByid(EmpInfo record);
 
