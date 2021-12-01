@@ -201,7 +201,7 @@
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
     <select id="getEmployeeByPage" resultType="com.schoolhr.model.Employee">
         select e.*,d.`id` as did,d.`name` as dname,pos.`id` as posid,pos.`name` as posname from employee e,department d,position pos where e.`departmentid`=d.`id` and e.`positionid`=pos.`id`
-        <if test="emp.username !=null and emp.username!=''">
+        <if test="emp.username !=null">
             and e.username like concat('%',#{emp.username},'%')
         </if>
         <if test="emp.politic !=null">
