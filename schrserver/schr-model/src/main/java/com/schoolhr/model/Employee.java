@@ -17,7 +17,7 @@ public class Employee implements Serializable {
     private String basisSalary;
     private String workstatus;
     private String e_mail;
-    private Integer departmentid;
+    private String departmentid;
     private String joblevel;
     private Integer positionid;
     private String dname;
@@ -116,7 +116,7 @@ public class Employee implements Serializable {
 
 
 
-    public int getDepartmentid() {
+    public String getDepartmentid() {
         return departmentid;
     }
 
@@ -124,9 +124,7 @@ public class Employee implements Serializable {
         return joblevel;
     }
 
-    public Double getContractTime() {
-        return contractTime;
-    }
+
 
     public Date getBeginworkDate() {
         return beginworkDate;
@@ -166,7 +164,7 @@ public class Employee implements Serializable {
         this.basisSalary = basisSalary;
     }
 
-    public void setDepartmentid(int departmentid) {
+    public void setDepartmentid(String departmentid) {
         this.departmentid = departmentid;
     }
 
@@ -184,6 +182,10 @@ public class Employee implements Serializable {
 
     public void setBeginworkDate(Date beginworkDate) {
         this.beginworkDate = beginworkDate;
+    }
+
+    public Double getContractTime() {
+        return contractTime;
     }
 
     public void setContractTime(Double contractTime) {
@@ -206,9 +208,7 @@ public class Employee implements Serializable {
         this.idCard = idCard;
     }
 
-    public void setDepartmentid(Integer departmentid) {
-        this.departmentid = departmentid;
-    }
+
 
     @Override
     public String toString() {

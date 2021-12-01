@@ -123,15 +123,15 @@
         insert into employee (userID, username,
         userSex, idCard, politic, phone,
         address, basisSalary, workstatus,
-        e_mail, departmentid, joblevel, constractTime, beginworkDate,
+        e_mail, departmentid, joblevel, contractTime, beginworkDate,
         endworkDate, birthday, positionid)
         values
         <foreach collection="list" separator="," item="emp">
-            (#{emp.userID,jdbcType=Integer}, #{emp.username,jdbcType=VARCHAR},
+            (#{emp.userID,jdbcType=INTEGER}, #{emp.username,jdbcType=VARCHAR},
             #{emp.userSex,jdbcType=CHAR}, #{emp.idCard,jdbcType=VARCHAR}, #{emp.politic,jdbcType=VARCHAR},
             #{emp.phone,jdbcType=VARCHAR}, #{emp.address,jdbcType=VARCHAR}, #{emp.basisSalary,jdbcType=INTEGER}, #{emp.workstatus,jdbcType=VARCHAR},
-            #{emp.e_mail,jdbcType=VARCHAR}, #{emp.departmentid,jdbcType=INTEGER}, #{emp.joblevel,jdbcType=VARCHAR},
-            #{emp.constractTime,jdbcType=DOUBLE}, #{emp.beginworkDate,jdbcType=DATE}, #{emp.endworkDate,jdbcType=DATE},
+            #{emp.e_mail,jdbcType=VARCHAR}, #{emp.departmentid,jdbcType=VARCHAR}, #{emp.joblevel,jdbcType=VARCHAR},
+            #{emp.contractTime,jdbcType=DOUBLE}, #{emp.beginworkDate,jdbcType=DATE}, #{emp.endworkDate,jdbcType=DATE},
             #{emp.birthday,jdbcType=DATE}, #{emp.positionid,jdbcType=INTEGER})
         </foreach>
     </insert>

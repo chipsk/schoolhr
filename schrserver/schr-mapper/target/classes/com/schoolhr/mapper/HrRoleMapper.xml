@@ -3,10 +3,17 @@
 <mapper namespace="com.schoolhr.mapper.HrRoleMapper">
     <insert id="insert"></insert>
     <insert id="insertSelective"></insert>
-    <insert id="addRole"></insert>
+    <insert id="addRole">
+        insert into hr_role (hrid,rid) values
+        <foreach collection="rids" item="rid" separator=",">
+            (#{hrid},#{rid})
+        </foreach>
+    </insert>
     <update id="updateByPrimaryKeySelective"></update>
     <update id="updateByPrimaryKey"></update>
     <delete id="deleteByPrimaryKey"></delete>
-    <delete id="deleteByHrid"></delete>
+    <delete id="deleteByHrid">
+        delete from hr_role where hrid=#{hrid}
+    </delete>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.HrRole"></select>
 </mapper>

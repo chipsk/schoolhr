@@ -229,37 +229,35 @@ public class POIUtils {
                                     case 3:
                                         employee.setUserSex(cellValue);
                                         break;
-                                    case 5:
+                                    case 4:
                                         employee.setIdCard(cellValue);
                                         break;
-                                    case 6:
+                                    case 5:
                                         employee.setPolitic(cellValue);
                                         break;
-                                    case 7:
+                                    case 6:
                                         employee.setPhone(cellValue);
                                         break;
-                                    case 8:
+                                    case 7:
                                         employee.setAddress(cellValue);
                                         break;
-                                    case 9:
+                                    case 8:
                                         employee.setBasisSalary(cellValue);
                                         break;
-                                    case 10:
+                                    case 9:
                                         employee.setWorkstatus(cellValue);
                                         break;
-                                    case 11:
+                                    case 10:
                                         employee.setE_mail(cellValue);
                                         break;
-                                    case 12:
-                                        int departmentIndex = allDepartments.indexOf(new Department(cellValue));
-                                        employee.setDepartmentid(allDepartments.get(departmentIndex).getId());
+                                    case 11:
+                                        employee.setDepartmentid(cellValue);
                                         break;
-                                    case 13:
+                                    case 12:
                                         employee.setJoblevel(cellValue);
                                         break;
                                     case 17:
-                                        int positionIndex = allPositions.indexOf(new Position(cellValue));
-                                        employee.setPositionid(allPositions.get(positionIndex).getId());
+                                        employee.setPositionid(Integer.valueOf(cellValue));
                                         break;
 
                                 }
