@@ -1,7 +1,7 @@
 package com.schoolhr.schrweb.per;
 
 import com.schoolhr.model.Personnel.EmpInfo;
-import com.schoolhr.model.Personnel.EmpSalary;
+import com.schoolhr.model.EmpWithSalary;
 import com.schoolhr.model.RespBean;
 import com.schoolhr.sevice.EmpSalaIncrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class EmpSalaIncrController {
     EmpSalaIncrService empSalaIncrService;
 
     @GetMapping("/") //ok
-    public List<EmpSalary> getAllSalary(){
+    public List<EmpWithSalary> getAllSalary(){
         return empSalaIncrService.getAllsalary();
     }
 

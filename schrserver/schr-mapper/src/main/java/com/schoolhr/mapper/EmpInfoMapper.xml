@@ -328,7 +328,7 @@
         select * from employee
     </select>
 
-    <select id="getAllsalary" resultType="com.schoolhr.model.Personnel.EmpSalary">
+    <select id="getAllsalary" resultType="com.schoolhr.model.EmpWithSalary">
         select * from employee
     </select>
     <select id="getEmDep" resultType="com.schoolhr.model.Personnel.EmpInfo">

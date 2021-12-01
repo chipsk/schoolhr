@@ -240,7 +240,17 @@
         select e.*,d.`id` as did,d.`name` as dname,pos.`id` as posid,pos.`name` as posname from employee e,department d,position pos where
         e.`departmentid`=d.`id` and e.`positionid`=pos.`id` and e.`id`=#{id}
     </select>
-    <select id="getEmployeeByPageWithSalary" resultType="com.schoolhr.model.Employee"></select>
+    <select id="getEmployeeByPageSalary" resultType="com.schoolhr.model.Employee">
+        SELECT e.*,d.`name` AS dname,s.id AS sid,s.`accumulationFundBase` AS saccumulationFundBase,s.`accumulationFundPer` AS saccumulationFundPer,
+               s.`allSalary` AS sallSalary,s.basisSalary AS sbasisSalary,s.`bonus` AS sbonus,s.`createDate` AS screateDate,s.`lunchSalary` AS
+                   slunchSalary,s.`medicalBase` AS smedicalBase,s.`medicalPer` AS smedicalPer,s.`name` AS sname,s.`socialBase` AS
+                   ssocialBase,s.`socialPer` AS ssocialPer,s.`trafficSalary` AS strafficSalary
+        FROM employee e LEFT JOIN empsalary es on e.id=es.eid LEFT JOIN salaryaccount s on es.sid = s.id LEFT JOIN department d on e.departmentid=d.id
+        order by e.id
+        <if test="page !=null and size !=null">
+            limit #{page},#{size}
+        </if>
+    </select>
     <select id="maxuserID" resultType="java.lang.Integer">
         select max(userID) from employee
     </select>

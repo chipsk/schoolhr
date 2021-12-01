@@ -32,7 +32,7 @@
         <result column="positionname" property="positionname" jdbcType="VARCHAR" />
         <result column="positionid" property="positionid" jdbcType="INTEGER" />
     </resultMap>
-    <resultMap id="Empsalary" type="com.schoolhr.model.Personnel.EmpSalary">
+    <resultMap id="Empsalary" type="com.schoolhr.model.EmpSalary">
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="userID" property="userID" jdbcType="VARCHAR" />
         <result column="username" property="username" jdbcType="VARCHAR" />
@@ -328,7 +328,7 @@
         select * from employee
     </select>
 
-    <select id="getAllsalary" resultType="com.schoolhr.model.Personnel.EmpSalary">
+    <select id="getAllsalary" resultType="com.schoolhr.model.EmpSalary">
         select * from employee
     </select>
     <select id="getEmDep" resultType="com.schoolhr.model.Personnel.EmpInfo">

@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/salary/sobcfg")
+@RequestMapping("/salary/sobcfg1")
 public class EmpWithSalaryController {
     @Autowired
     EmpWithSalaryService empWithSalaryService;
