@@ -5,9 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/mailserver/pom.xml" />
         <option value="$PROJECT_DIR$/schrserver/pom.xml" />
         <option value="$PROJECT_DIR$/schrserver/schr-web/pom.xml" />
+        <option value="$PROJECT_DIR$/mailserver/pom.xml" />
       </list>
     </option>
   </component>

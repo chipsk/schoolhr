@@ -5,6 +5,7 @@ import com.schoolhr.model.JobLevel;
 import com.schoolhr.model.RespBean;
 import com.schoolhr.sevice.HrInfoService;
 import com.schoolhr.sevice.JobLevelService;
+import com.schoolhr.sevice.LoggerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +16,18 @@ import java.util.List;
 public class HrInfoController {
     @Autowired
     HrInfoService hrInfoService;
+    @Autowired
+    LoggerInfoService loggerInfoService;
 
     @GetMapping("/")
     public List<Hr> getAllHrInfo(){
+        loggerInfoService.insertLoggerInfos("/statistics/personnel/hrinfo","统计所有的用户信息");
         return hrInfoService.getAllHrInfo();
     }
     @PostMapping("/")
     public RespBean addHrInfo(@RequestBody Hr hr){
         if (hrInfoService.addHrInfo()){
+            loggerInfoService.insertLoggerInfos("/statistics/personnel/hrinfo","添加所有的用户信息");
             return RespBean.ok("添加成功");
         }
         return RespBean.error("添加失败");
@@ -30,6 +35,7 @@ public class HrInfoController {
     @PutMapping("/")
     public RespBean updateHrInfo(@RequestBody Hr hr){
         if (hrInfoService.updateHrInfo()) {
+            loggerInfoService.insertLoggerInfos("/statistics/personnel/hrinfo","更新所有的用户信息");
             return RespBean.ok("更新成功");
         }
         return RespBean.error("更新失败");
@@ -38,6 +44,7 @@ public class HrInfoController {
     @DeleteMapping("/{id}")
     public RespBean deleteHrInfoById(@PathVariable Integer id){
         if (hrInfoService.deleteHrInfoById()){
+            loggerInfoService.insertLoggerInfos("/statistics/personnel/hrinfo","删除所有的用户信息");
             return RespBean.ok("删除成功");
         }
         return RespBean.error("删除失败");
@@ -45,6 +52,7 @@ public class HrInfoController {
     @DeleteMapping("/")
     public RespBean deleteHrInfoByIds(Integer[] ids){
         if (hrInfoService.deleteHrInfoByIds()){
+            loggerInfoService.insertLoggerInfos("/statistics/personnel/hrinfo","批量删除所有的用户信息");
             return RespBean.ok("批量删除成功");
         }
         return RespBean.error("批量删除失败");

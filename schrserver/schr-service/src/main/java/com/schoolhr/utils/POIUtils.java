@@ -242,7 +242,7 @@ public class POIUtils {
                                         employee.setAddress(cellValue);
                                         break;
                                     case 8:
-                                        employee.setBasisSalary(cellValue);
+                                        employee.setBasisSalary(Integer.valueOf(cellValue));
                                         break;
                                     case 9:
                                         employee.setWorkstatus(cellValue);

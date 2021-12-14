@@ -23,4 +23,6 @@ public interface EmpWithSalaryMapper {
 //    Long getTotal(@Param("emp") Employee employee,@Param("beginDateScope") Date[] beginDateScope);
 //
     List<Employee> getAllSalaryAccounts(@Param("page") Integer page, @Param("size") Integer size, @Param("emps") Employee employee, @Param("beginDateScope") Date[] beginDateScope);
+
+    List<Salary> getAllSalaries();
 }

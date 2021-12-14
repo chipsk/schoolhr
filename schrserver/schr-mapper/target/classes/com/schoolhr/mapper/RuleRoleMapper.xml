@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.schoolhr.mapper.RuleRoleMapper">
+    <resultMap id="BaseResultMap" type="com.schoolhr.model.RuleRole" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="eid" property="eid" jdbcType="INTEGER" />
+        <result column="rid" property="rid" jdbcType="INTEGER" />
+        <result column="reasonRecord" property="reasonRecord" jdbcType="VARCHAR" />
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="getAllInfo" type="com.schoolhr.model.RuleRole" extends="BaseResultMap">
+        <association property="employee" javaType="com.schoolhr.model.Employee">
+            <id column="eid" property="id" jdbcType="INTEGER"/>
+            <result column="userID" property="userID" jdbcType="VARCHAR" />
+            <result column="username" property="username" jdbcType="VARCHAR" />
+            <result column="userSex" property="userSex" jdbcType="CHAR" />
+            <result column="idCard" property="idCard" jdbcType="VARCHAR" />
+            <result column="politic" property="politic" jdbcType="VARCHAR" />
+            <result column="phone" property="phone" jdbcType="VARCHAR" />
+            <result column="address" property="address" jdbcType="VARCHAR" />
+            <result column="basisSalary" property="basisSalary" jdbcType="INTEGER" />
+            <result column="workstatus" property="workstatus" jdbcType="VARCHAR" />
+            <result column="e_mail" property="e_mail" jdbcType="VARCHAR" />
+            <result column="departmentid" property="departmentid" jdbcType="INTEGER" />
+            <result column="joblevel" property="joblevel" jdbcType="VARCHAR" />
+            <result column="contractTime" property="contractTime" jdbcType="DOUBLE" />
+            <result column="beginworkDate" property="beginworkDate" jdbcType="DATE" />
+            <result column="endworkDate" property="endworkDate" jdbcType="DATE" />
+            <result column="birthday" property="birthday" jdbcType="DATE" />
+            <result column="positionid" property="positionid" jdbcType="INTEGER" />
+        </association>
+        <association property="rule" javaType="com.schoolhr.model.Rule">
+            <id column="rid" property="id" jdbcType="INTEGER" />
+            <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+            <result column="ruleName" property="ruleName" jdbcType="VARCHAR" />
+            <result column="ruleValue" property="ruleValue" jdbcType="INTEGER" />
+            <result column="enabled" property="enabled" jdbcType="BIT" />
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, eid, rid, reasonRecord, createDate
+    </sql>
+    <!--  使用分页查询所有员工所有月份的奖惩记录-->
+    <select id="getAllInfoByPage" resultMap="getAllInfo">
+        select rr.*,e.*,r.*
+        from rule_role rr
+        LEFT JOIN employee e ON e.`id`=rr.`eid`
+        LEFT JOIN rule r ON rr.`rid`=r.`id`
+        <where>
+            <if test="rr!=null">
+                <if test="rr.reasonRecord !=null">
+                    and rr.`reasonRecord` like concat('%',#{rr.reasonRecord},'%')
+                </if>
+
+                <if test="rr.rid !=null">
+                    and rr.`rid` = #{rr.rid}
+                </if>
+                <if test="beginDateScope !=null">
+                    and rr.`createDate` between #{beginDateScope[0]} and #{beginDateScope[1]}
+                </if>
+            </if>
+            <if test="userID !=null">
+                and e.`userID` = #{userID}
+            </if>
+            <if test="username !=null and username!=''">
+                and e.`username` like concat('%',#{username},'%')
+            </if>
+        </where>
+        order by rr.`createDate` DESC
+        <if test="page !=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
+    <!--  获取总记录数-->
+    <select id="getTotal" resultType="java.lang.Long">
+        select count(*)
+        from rule_role rr
+        LEFT JOIN rule r ON rr.`rid`=r.`id`
+        LEFT JOIN employee e ON e.`id`=rr.`eid`
+        <where>
+            <if test="rr!=null">
+                <if test="rr.reasonRecord !=null">
+                    and rr.`reasonRecord` like concat('%',#{rr.reasonRecord},'%')
+                </if>
+
+                <if test="rr.rid !=null">
+                    and rr.`rid` = #{rr.rid}
+                </if>
+                <if test="beginDateScope !=null">
+                    and rr.`createDate` between #{beginDateScope[0]} and #{beginDateScope[1]}
+                </if>
+            </if>
+            <if test="userID !=null">
+                and e.`userID` = #{userID}
+            </if>
+            <if test="username !=null and username!=''">
+                and e.`username` like concat('%',#{username},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getInfosByTimes" resultMap="getAllInfo">
+        select rr.*,r.ruleName,r.ruleValue
+        from rule_role rr
+                 LEFT JOIN rule r ON rr.`rid`=r.`id`
+        where
+            rr.createDate between #{startDate} and #{endDate}
+    </select>
+    <!--  -->
+    <select id="getAllInfosByEidAndDate" resultMap="BaseResultMap">
+        select *
+        from rule_role
+        where
+            eid = #{eid}
+          and createDate between #{beginDateScope[0]} and #{beginDateScope[1]}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from rule_role
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from rule_role
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.schoolhr.model.RuleRole" >
+        insert into rule_role (id, eid, rid,
+                               reasonRecord, createDate)
+        values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER},
+                #{reasonRecord,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.schoolhr.model.RuleRole" >
+        insert into rule_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="eid != null" >
+                eid,
+            </if>
+            <if test="rid != null" >
+                rid,
+            </if>
+            <if test="reasonRecord != null" >
+                reasonRecord,
+            </if>
+            <if test="createDate != null" >
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="eid != null" >
+                #{eid,jdbcType=INTEGER},
+            </if>
+            <if test="rid != null" >
+                #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="reasonRecord != null" >
+                #{reasonRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.RuleRole" >
+        update rule_role
+        <set >
+            <if test="eid != null" >
+                eid = #{eid,jdbcType=INTEGER},
+            </if>
+            <if test="rid != null" >
+                rid = #{rid,jdbcType=INTEGER},
+            </if>
+            <if test="reasonRecord != null" >
+                reasonRecord = #{reasonRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.RuleRole" >
+        update rule_role
+        set eid = #{eid,jdbcType=INTEGER},
+            rid = #{rid,jdbcType=INTEGER},
+            reasonRecord = #{reasonRecord,jdbcType=VARCHAR},
+            createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

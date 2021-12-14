@@ -3,6 +3,7 @@ package com.schoolhr.sevice;
 import com.schoolhr.mapper.EmpWithSalaryMapper;
 import com.schoolhr.model.Employee;
 import com.schoolhr.model.RespPageBean;
+import com.schoolhr.model.Salary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,9 @@ public class EmpWithSalaryService {
 
     public Integer updateSalaryById(Employee employee) {
         return empWithSalaryMapper.updateByPrimaryKeySelective(employee);
+    }
+
+    public List<Salary> getAllSalaries() {
+        return  empWithSalaryMapper.getAllSalaries();
     }
 }

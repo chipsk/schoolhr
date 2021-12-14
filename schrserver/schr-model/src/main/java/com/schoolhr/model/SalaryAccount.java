@@ -1,5 +1,7 @@
 package com.schoolhr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class SalaryAccount {
@@ -19,6 +21,7 @@ public class SalaryAccount {
 
     private Float socialPer;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createDate;
 
     private Integer medicalBase;

@@ -26,7 +26,7 @@ public class MenuService {
         return menuMapper.getMenusByHrId(((Hr) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
-    //@Cacheable 缓存  后面再用
+    @Cacheable
     public List<Menu> getAllMenusWithRole(){
         return menuMapper.getAllMenusWithRole();
     }

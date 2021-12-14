@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.schoolhr.mapper.EmpSalaryMapper">
-    <resultMap id="BaseResultMap" type="com.schoolhr.model.EmpSalary" >
+    <resultMap id="BaseResultMap" type="com.schoolhr.model.EmpWithSalary" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="eid" property="eid" jdbcType="INTEGER" />
         <result column="sid" property="sid" jdbcType="INTEGER" />
@@ -9,11 +9,11 @@
     <sql id="Base_Column_List" >
         id, eid, sid
     </sql>
-    <insert id="insert" parameterType="com.schoolhr.model.EmpSalary" >
+    <insert id="insert" parameterType="com.schoolhr.model.EmpWithSalary" >
         insert into empsalary (id, eid, sid)
         values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="com.schoolhr.model.EmpSalary" >
+    <insert id="insertSelective" parameterType="com.schoolhr.model.EmpWithSalary" >
         insert into empsalary
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -38,7 +38,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.EmpSalary" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.schoolhr.model.EmpWithSalary" >
         update empsalary
         <set >
             <if test="eid != null" >
@@ -50,7 +50,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.EmpSalary" >
+    <update id="updateByPrimaryKey" parameterType="com.schoolhr.model.EmpWithSalary" >
         update empsalary
         set eid = #{eid,jdbcType=INTEGER},
             sid = #{sid,jdbcType=INTEGER}

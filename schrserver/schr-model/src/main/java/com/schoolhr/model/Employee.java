@@ -14,7 +14,7 @@ public class Employee implements Serializable {
     private String politic;
     private String phone;
     private String address;
-    private String basisSalary;
+    private Integer basisSalary;
     private String workstatus;
     private String e_mail;
     private String departmentid;
@@ -23,6 +23,9 @@ public class Employee implements Serializable {
     private String dname;
     private String posname;
     private String accountName;
+    private String salary;
+    private SalaryAccount salaryAccount;
+    private Department department;
 
     public String getAccountName() {
         return accountName;
@@ -31,7 +34,6 @@ public class Employee implements Serializable {
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
-
 
     public String getDname() {
         return dname;
@@ -110,7 +112,7 @@ public class Employee implements Serializable {
         return address;
     }
 
-    public String getBasisSalary() {
+    public Integer getBasisSalary() {
         return basisSalary;
     }
 
@@ -160,7 +162,7 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public void setBasisSalary(String basisSalary) {
+    public void setBasisSalary(Integer basisSalary) {
         this.basisSalary = basisSalary;
     }
 
@@ -209,37 +211,36 @@ public class Employee implements Serializable {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", userID='" + userID + '\'' +
-                ", username='" + username + '\'' +
-                ", userSex='" + userSex + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", politic='" + politic + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", basisSalary='" + basisSalary + '\'' +
-                ", workstatus='" + workstatus + '\'' +
-                ", e_mail='" + e_mail + '\'' +
-                ", departmentid=" + departmentid +
-                ", joblevel='" + joblevel + '\'' +
-                ", positionid=" + positionid +
-                ", birthday=" + birthday +
-                ", contractTime=" + contractTime +
-                ", beginworkDate=" + beginworkDate +
-                ", endworkDate=" + endworkDate +
-                '}';
-    }
-
     public Integer getPositionid() {
         return positionid;
     }
 
     public void setPositionid(Integer positionid) {
         this.positionid = positionid;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public SalaryAccount getSalaryAccount() {
+        return salaryAccount;
+    }
+
+    public void setSalaryAccount(SalaryAccount salaryAccount) {
+        this.salaryAccount = salaryAccount;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
 

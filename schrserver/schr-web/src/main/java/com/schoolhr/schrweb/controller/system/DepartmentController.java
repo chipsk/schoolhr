@@ -4,6 +4,7 @@ package com.schoolhr.schrweb.controller.system;
 import com.schoolhr.model.Department;
 import com.schoolhr.model.RespBean;
 import com.schoolhr.sevice.DepartmentService;
+import com.schoolhr.sevice.LoggerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +17,18 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    @Autowired
+    LoggerInfoService loggerInfoService;
+
     @GetMapping("/")
     public List<Department> getAllDepartments(){
+        loggerInfoService.insertLoggerInfos("/system/basic/department/","查询所有的部门信息");
         return departmentService.getAllDepartments();
     }
 
     @GetMapping("/all")
     public List<Department> getAllDepartmentsWithNone(){
+        loggerInfoService.insertLoggerInfos("/system/basic/department/all","查询所有的部门信息");
         return departmentService.getAllDepartmentsWithNone();
     }
 
@@ -30,6 +36,7 @@ public class DepartmentController {
     public RespBean addDep(@RequestBody Department dep){
         departmentService.addDep(dep);
         if (dep.getResult()==1){
+            loggerInfoService.insertLoggerInfos("/system/basic/department/","添加部门信息");
             return RespBean.ok("添加成功",dep);
         }
         return RespBean.error("添加失败");
@@ -45,6 +52,7 @@ public class DepartmentController {
         }else if (dep.getResult()==-1){
             return RespBean.error("该部门下有员工，删除失败");
         }else if (dep.getResult()==1){
+            loggerInfoService.insertLoggerInfos("/system/basic/department/","删除该部门信息");
             return RespBean.ok("删除成功");
         }
         return RespBean.error("删除失败");

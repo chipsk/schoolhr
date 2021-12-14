@@ -4,11 +4,12 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://39.108.128.217:3306/schr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#  rabbitmq:
-#    username: guest
-#    password: guest
-#    host: 127.0.0.1
-#    #    publisher-confirms: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5672
+  #    publisher-confirms: true
 #    publisher-confirm-type: correlated
 #    publisher-returns: true
   redis:
@@ -18,6 +19,6 @@ spring:
     connect-timeout: 10000
     password: root
 server:
-  port: 8081
+  port: 8085
   compression: #开启gzip解压
     enabled: true

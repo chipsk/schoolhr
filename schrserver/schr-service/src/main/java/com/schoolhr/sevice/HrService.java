@@ -77,4 +77,23 @@ public class HrService implements UserDetailsService {
     public Integer updateUserface(String url, Integer id) {
         return hrMapper.updateUserface(url, id);
     }
+
+    public Integer addHr() {
+        Hr hr=new Hr();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodePass= encoder.encode("123");
+        hr.setPassword(encodePass);
+//        生成一个随机账号，密码默认“123”
+        String a="";
+        for(int i=0;i<10;i++){
+            a+=(int)(Math.random()*10);
+        }
+        hr.setUsername(a);
+        hr.setName("用户"+a+"");
+        hr.setPhone("****");
+        hr.setEnabled(true);
+        hr.setAddress("****");
+        hr.setTelephone("****");
+        return hrMapper.insertSelective(hr);
+    }
 }

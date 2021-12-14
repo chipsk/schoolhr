@@ -42,8 +42,30 @@
         </association>
     </resultMap>
 
+    <resultMap id="BaseResultMap2" type="com.schoolhr.model.SalaryAccount">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="basisSalary" property="basisSalary" jdbcType="INTEGER"/>
+        <result column="bonus" property="bonus" jdbcType="INTEGER"/>
+        <result column="lunchSalary" property="lunchSalary" jdbcType="INTEGER"/>
+        <result column="trafficSalary" property="trafficSalary" jdbcType="INTEGER"/>
+        <result column="allSalary" property="allSalary" jdbcType="INTEGER"/>
+        <result column="socialBase" property="socialBase" jdbcType="INTEGER"/>
+        <result column="socialPer" property="socialPer" jdbcType="REAL"/>
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="medicalBase" property="medicalBase" jdbcType="INTEGER"/>
+        <result column="medicalPer" property="medicalPer" jdbcType="REAL"/>
+        <result column="accumulationFundBase" property="accumulationFundBase" jdbcType="INTEGER"/>
+        <result column="accumulationFundPer" property="accumulationFundPer" jdbcType="REAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
       id,userID,username,idCard,phone,e_mail,basisSalary,name
+    </sql>
+
+    <sql id="Base_Column_List2">
+        id, basisSalary, bonus, lunchSalary, trafficSalary, allSalary, socialBase, socialPer,
+    createDate, medicalBase, medicalPer, accumulationFundBase, accumulationFundPer, name
     </sql>
     <insert id="insert"></insert>
     <insert id="insertSelective"></insert>
@@ -53,9 +75,10 @@
 
     </delete>
     <select id="getAllSalaryAccounts" resultType="com.schoolhr.model.Employee">
-        select e.`id`,e.userID,e.username,e.userSex,e.idCard,e.politic,e.phone,e.address,e.basisSalary,e.workstatus,e.e_mail,e.departmentid,e.joblevel,
-               e.contractTime,e.beginworkDate,e.endworkDate,e.birthday,e.positionid,sa.`name` as accountName
-        from employee e LEFT JOIN salaryaccount sa ON e.departmentid=sa.departmentid
+        select e.*, dept.`name` as dname, sa.`name` as accountName
+        from employee e
+        LEFT JOIN salaryaccount sa ON e.departmentid=sa.departmentid
+        LEFT JOIN department dept ON e.departmentid = dept.id
         where 1=1
         <if test="emps.username !=null and emps.username!=''">
             and username like concat('%',#{emps.username},'%')
@@ -68,6 +91,11 @@
         </if>
     </select>
     <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Employee"></select>
+    <select id="getAllSalaries" resultMap="BaseResultMap2">
+        select
+        <include refid="Base_Column_List2"/>
+        from salaryaccount
+    </select>
 
 
 </mapper>

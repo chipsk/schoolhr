@@ -51,6 +51,14 @@ public class EmployeeService {
         double month = (Double.parseDouble(yearFormat.format(endContract)) - Double.parseDouble(yearFormat.format(beginContract))) * 12 + (Double.parseDouble(monthFormat.format(endContract)) - Double.parseDouble(monthFormat.format(beginContract)));
         employee.setContractTime(Double.parseDouble(decimalFormat.format(month / 12)));
         int result = employeeMapper.insertSelective(employee);
+        if (result == 1) {
+            //获取添加员工的id并将id转化为职称名称，部门名称等。
+            Employee emp = employeeMapper.getEmployeeByUserID(employee.getUserID());
+            //打印职工信息，确认是不是消息中间件的问题
+            logger.info(emp.toString());
+            //对应模板中的监听的队列名称
+            rabbitTemplate.convertAndSend("schoolhr.mail.welcome", emp);
+        }
 //        if (result == 1) {
 //            Employee emp = employeeMapper.getEmployeeById(employee.getId());
 //            //生成消息的唯一id
