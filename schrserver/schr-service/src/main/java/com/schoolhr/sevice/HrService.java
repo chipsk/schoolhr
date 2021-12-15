@@ -63,9 +63,11 @@ public class HrService implements UserDetailsService {
 
     public boolean updateHrPasswd(String oldpass, String pass, Integer hrid) {
         Hr hr = hrMapper.selectByPrimaryKey(hrid);
+        System.out.println(hr);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (encoder.matches(oldpass, hr.getPassword())) {
             String encodePass = encoder.encode(pass);
+
             Integer result = hrMapper.updatePasswd(hrid, encodePass);
             if (result == 1) {
                 return true;
@@ -73,6 +75,7 @@ public class HrService implements UserDetailsService {
         }
         return false;
     }
+
 
     public Integer updateUserface(String url, Integer id) {
         return hrMapper.updateUserface(url, id);
