@@ -20,6 +20,9 @@
             <result column="rnameZh" property="nameZh"/>
         </collection>
     </resultMap>
+    <sql id="Base_Column_List" >
+        id, name, phone, telephone, address, enabled, username, password, remark
+    </sql>
     <insert id="insert">
         insert into hr (id, name, phone,
                         telephone, address, enabled,
@@ -153,7 +156,12 @@
         delete from hr
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Hr"></select>
+    <select id="selectByPrimaryKey" resultType="com.schoolhr.model.Hr">
+        select
+        <include refid="Base_Column_List" />
+        from hr
+        where id = #{id,jdbcType=INTEGER}
+    </select>
     <select id="getHrRolesById" resultType="com.schoolhr.model.Role">
         SELECT r.* FROM role r,hr_role hrr WHERE hrr.`rid`=r.`id` AND hrr.`hrid`=#{id}
     </select>

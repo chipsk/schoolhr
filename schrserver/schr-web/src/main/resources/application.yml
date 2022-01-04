@@ -18,6 +18,8 @@ spring:
     port: 6379
     connect-timeout: 10000
     password: root
+  cache:
+      cache-names: menus_cache
 server:
   port: 8085
   compression: #开启gzip解压
