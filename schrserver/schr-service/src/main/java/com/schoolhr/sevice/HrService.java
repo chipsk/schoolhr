@@ -67,7 +67,6 @@ public class HrService implements UserDetailsService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (encoder.matches(oldpass, hr.getPassword())) {
             String encodePass = encoder.encode(pass);
-
             Integer result = hrMapper.updatePasswd(hrid, encodePass);
             if (result == 1) {
                 return true;

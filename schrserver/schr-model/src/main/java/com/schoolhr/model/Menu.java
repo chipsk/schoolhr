@@ -22,6 +22,7 @@ public class Menu implements Serializable {
     private Integer parentId;
 
     private Boolean enabled;
+
     private List<Menu> children;
     private List<Role> roles;
 
